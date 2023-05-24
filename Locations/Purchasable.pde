@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 public class Purchasable extends Locations {
   String name;
   int value, rent, level;
@@ -15,8 +14,8 @@ public class Purchasable extends Locations {
   public int getLevel() {
     return level;
   }
-=======
-public class Purchasable extends Locations{
-String name, owner;
->>>>>>> fd4b4cfa7b6088669b2ed6ba33803a11b0d690b3
+  // do when player class is implemented
+  //public void setOwner(String owner){
+  //  return owner;
+  //}
 }
