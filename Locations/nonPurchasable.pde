@@ -7,9 +7,7 @@ public class nonPurchasable extends Locations {
     this.value = value;
   }
   
-  public String getName() {
-    super();
-  }
+  public String getName() {}
   
   public int getValue() {
     return value;
