@@ -19,7 +19,7 @@ public class Purchasable extends Locations {
     return rent;
   }
   // do when player class is implemented
-  //public void setOwner(String owner){
-  //  return owner;
-  //}
+  public void setOwner(Player player){
+    
+  }
 }
