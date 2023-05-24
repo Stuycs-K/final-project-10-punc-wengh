@@ -1,6 +1,8 @@
-public class Purchasable extends Locations {
+abstract class Purchasable extends Locations {
   String name;
   int value, rent, level;
+  
+  public Purchasable(){}
   
   public Purchasable(String name, int value, int level, int rent) {
     super(name);
