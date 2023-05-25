@@ -1,4 +1,4 @@
-public class nonPurchasable extends Locations {
+  public class nonPurchasable extends Locations {
   String name;
   int value;
   
