@@ -1,12 +1,14 @@
 public class Player{
   String name, currentLocation;
   int balance;
-  ArrayList Purchasables, Cards;
+  ArrayList <Purchasable>Purchasables;
+  //ArrayList <Cards>Cards;
+  
   public Player(){
     name = "player";
     balance = 1500;
     currentLocation = "start";
-
+    Purchasables = new <ArrayList> 
   }
 
   public Player(String enteredName){
@@ -20,14 +22,16 @@ public class Player{
   public int getBalance(){
     return balance;
   }
-  public changeBalance(int amount){
+  public int changeBalance(int amount){
     balance += amount;
+    return balance;
   }
-  public addOwned(Purchasables purchasable){
-    Purchasables.add(purchasable);
+  public ArrayList addOwned(Purchasable yes){
+    Purchasables.add(yes);
   }
   public boolean inDebt(){
     return (balance <= 0);
   }
 
+ 
 }

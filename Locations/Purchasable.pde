@@ -1,6 +1,8 @@
-public class Purchasable extends Locations {
+abstract class Purchasable extends Locations {
   String name;
   int value, rent, level;
+  
+  public Purchasable(){}
   
   public Purchasable(String name, int value, int level, int rent) {
     super(name);
@@ -19,7 +21,7 @@ public class Purchasable extends Locations {
     return rent;
   }
   // do when player class is implemented
-  //public void setOwner(String owner){
-  //  return owner;
-  //}
+  public void setOwner(Player player){
+    
+  }
 }
