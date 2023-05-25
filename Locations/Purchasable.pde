@@ -1,6 +1,7 @@
 abstract class Purchasable extends Locations {
   String name;
   int value, rent, level;
+  boolean owned;
   
   public Purchasable(){}
   
@@ -22,6 +23,6 @@ abstract class Purchasable extends Locations {
   }
   // do when player class is implemented
   public void setOwner(Player player){
-    
+    owned = true;
   }
 }
