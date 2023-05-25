@@ -10,6 +10,7 @@ abstract class Purchasable extends Locations {
     this.value = value;
     this.level = level;
     this.rent = rent;
+    owned = false;
   }
   
   public int getValue() {
