@@ -10,7 +10,5 @@ public class Utility extends Purchasable {
     super(name, value, -1, fee);
   }
   
-  public String getName() {}
-  
   public String getOwner(){}
 }

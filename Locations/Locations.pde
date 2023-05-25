@@ -1,4 +1,3 @@
-public class Locations {
   String name;
   
   public Locations(){}
@@ -10,4 +9,3 @@ public class Locations {
   public String getName() {
     return name;
   }
-}
