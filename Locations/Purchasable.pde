@@ -5,7 +5,7 @@ abstract class Purchasable extends Locations {
   
   public Purchasable(){}
   
-  public Purchasable(String name, int value, int level, int rent) {
+  public Purchasable(String name, int value, int level, int rent, boolean owned) {
     super(name);
     this.value = value;
     this.level = level;
