@@ -9,28 +9,32 @@ public class Property extends Purchasable {
     this.propColor = color;
   }
   
-public String getName(){}
-  
-  public int getValue(){}
-  
-  public int getLevel(){}
-  
-  public int getRent(){}
-  
-  public String getOwner(){}
-  
   public String getColor() {
     return propColor;
   }
-  
-  public void setOwner(){}
   
   public int levelUp() {
     if (getColor().equals("red") {
     }
     else if (getColor().equals("brown")) {
+      this.withdraw(50);
     }
     else if (getColor().equals("light blue")) {
+      this.withdraw(50);
+    }
+    else if (getColor().equals("pink")) {
+      this.withdraw(100);
+    }
+    else if (getColor().equals("orange")) {
+      this.withdraw(100);
+    }
+    else if (getColor().equals("yellow")) {
+      this.withdraw(150);
+    }
+    else if (getColor().equals("green")) {
+    }
+    else {
+      this.withdraw(200);
     }
   }
 }

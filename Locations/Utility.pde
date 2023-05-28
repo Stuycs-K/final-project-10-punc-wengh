@@ -9,6 +9,4 @@ public class Utility extends Purchasable {
   public Utility(String name, String owner, int value, int fee) {
     super(name, value, -1, fee);
   }
-  
-  public String getOwner(){}
 }

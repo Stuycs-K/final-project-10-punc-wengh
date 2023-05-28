@@ -7,12 +7,14 @@ abstract class Purchasable extends Locations {
   
   public Purchasable(String name, int value, int level, int rent, boolean owned) {
     super(name);
-    this.value = value;
+   this.value = value;
     this.level = level;
     this.rent = rent;
     owned = false;
   }
-  
+  public String getName() {
+    return name;
+  }
   public int getValue() {
     return value;
   }
@@ -21,6 +23,9 @@ abstract class Purchasable extends Locations {
   }
   public int getRent(){
     return rent;
+  }
+  public String getOwner() {
+    return this.getPlayerName();
   }
   // do when player class is implemented
   public void setOwner(Player player){
