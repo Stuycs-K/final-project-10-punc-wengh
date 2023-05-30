@@ -6,7 +6,7 @@ public class Property extends Purchasable {
   
   public Property(String name, String propColor, int level, int value, int rent) {
     super(name, value, level, rent);
-    this.propColor = color;
+    this.propColor = propColor;
   }
   
 public String getName(){}
