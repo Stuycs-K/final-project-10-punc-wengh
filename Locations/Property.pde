@@ -18,23 +18,31 @@ public class Property extends Purchasable {
     }
     else if (getColor().equals("brown")) {
       this.withdraw(50);
+      (this.Purchasables).add(getName());
     }
     else if (getColor().equals("light blue")) {
       this.withdraw(50);
+      (this.Purchasables).add(getName());
     }
     else if (getColor().equals("pink")) {
       this.withdraw(100);
-    }
+      (this.Purchasables).add(getName());
+    }.
     else if (getColor().equals("orange")) {
       this.withdraw(100);
+      (this.Purchasables).add(getName());
     }
     else if (getColor().equals("yellow")) {
       this.withdraw(150);
+      (this.Purchasables).add(getName());
     }
     else if (getColor().equals("green")) {
+      this.withdraw(150);
+      (this.Purchasables).add(getName());
     }
     else {
       this.withdraw(200);
+      (this.Purchasables).add(getName());
     }
   }
 }
