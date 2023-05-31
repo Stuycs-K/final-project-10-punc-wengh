@@ -1,10 +1,9 @@
 abstract class Card extends nonPurchasable {
-  
   String description;
   
   public Card(String name, int value, String description) {
     super(name);
-    this.value = value;
+    super(value);
     this.description = description;
   }
   
