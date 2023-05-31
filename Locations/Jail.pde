@@ -1,4 +1,4 @@
-public Jail extends nonPurchasable {
+public class Jail extends nonPurchasable {
   String name;
   int value;
   
@@ -8,7 +8,7 @@ public Jail extends nonPurchasable {
     super(name, value);
   }
   
-  public deduct() {
+  public void deduct() {
     this.withdraw(200);
   }
   
