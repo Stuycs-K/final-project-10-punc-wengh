@@ -12,10 +12,6 @@ abstract class Purchasable extends Locations {
     this.rent = rent;
     owned = false;
   } 
- 
-  public String getName() {
-    return name;
-  }
 
   public int getValue() {
     return value;
