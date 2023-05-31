@@ -1,5 +1,6 @@
 public class Board {
   Players[] = new Players[4];
+  ArrayList<Locations> Locations;
 
   public Board() {
     //initialize Players
