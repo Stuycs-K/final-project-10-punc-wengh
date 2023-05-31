@@ -2,8 +2,6 @@ public class Board {
   Player[] Players = new Player[4];
   ArrayList <Locations> Locations;
 
-  
-
   public Board() {
     //initialize Players
     for (int i = 0; i < Players.length; i++) {

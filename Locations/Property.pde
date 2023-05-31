@@ -9,21 +9,9 @@ public class Property extends Purchasable {
     this.propColor = propColor;
   }
   
-public String getName(){}
-  
-  public int getValue(){}
-  
-  public int getLevel(){}
-  
-  public int getRent(){}
-  
-  public String getOwner(){}
-  
   public String getColor() {
     return propColor;
   }
-  
-  public void setOwner(){}
   
   public int levelUp() {
     if (getColor().equals("red") {
@@ -32,6 +20,42 @@ public String getName(){}
     }
     else if (getColor().equals("light blue")) {
     }
-    else if (
+    else if (getColor().equals("pink")) {
+    }
+    else if (getColor().equals("orange")) {
+    }
+    else if (getColor().equals("yellow")) {
+    }
+    else if (getColor().equals("green")) {
+    }
+    else {
+      //dark blue
+      this.withdraw(50);
+      (this.Purchasables).add(getName());
+    }
+    else if (getColor().equals("light blue")) {
+      this.withdraw(50);
+      (this.Purchasables).add(getName());
+    }
+    else if (getColor().equals("pink")) {
+      this.withdraw(100);
+      (this.Purchasables).add(getName());
+    }.
+    else if (getColor().equals("orange")) {
+      this.withdraw(100);
+      (this.Purchasables).add(getName());
+    }
+    else if (getColor().equals("yellow")) {
+      this.withdraw(150);
+      (this.Purchasables).add(getName());
+    }
+    else if (getColor().equals("green")) {
+      this.withdraw(150);
+      (this.Purchasables).add(getName());
+    }
+    else {
+      this.withdraw(200);
+      (this.Purchasables).add(getName());
+    }
   }
 }

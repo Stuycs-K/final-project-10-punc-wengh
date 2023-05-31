@@ -27,6 +27,15 @@ public class Player{
     balance += amount;
     return balance;
   }
+
+  public void deposit(int amount){
+    balance += amount;
+    return balance;
+  }
+  public void withdraw(int amount){
+    balance -= amount;
+    return balance;
+  }
   public ArrayList addOwned(Purchasable yes){
     Purchasables.add(yes);
     return Purchasables;
