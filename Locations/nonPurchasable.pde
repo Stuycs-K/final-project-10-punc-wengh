@@ -1,5 +1,4 @@
 abstract class nonPurchasable extends Locations {
-
   String name;
   int value;
   
