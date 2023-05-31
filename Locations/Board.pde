@@ -16,7 +16,7 @@ public class Board {
     //initialize Players
     names = names.split(",");
     for (int i = 0; i < Players.length; i++) {
-      Players[i] = new Player(names[i]);
+      Players[i] = Player(names[i]);
     }
   }
   
