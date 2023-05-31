@@ -5,10 +5,10 @@ public class Start extends nonPurchasable {
   public Start(){}
   
   public Start(String name, int value) {
-    super(name, value);
+    super(name, 200);
   }
   
   public void grant() {
-    this.deposit(200);
+    this.deposit(value);
   }
 }
