@@ -7,10 +7,7 @@ public class Board {
     for (int i = 0; i < Players.length; i++) {
       Players[i] = new Players("Player " + i);
     }
-    
-    //initialize locations
-    Locations.add(Property(brown, 0, 60, 60));
-    
+
   }
   public Board(String names) {
     //initialize Players
@@ -19,6 +16,4 @@ public class Board {
       Players[i] = Player(names[i]);
     }
   }
-  
-
 }

@@ -2,8 +2,6 @@ public class Start extends nonPurchasable {
   String name;
   int value;
   
-  public Start(){}
-  
   public Start(String name, int value) {
     super(name, 200);
   }
