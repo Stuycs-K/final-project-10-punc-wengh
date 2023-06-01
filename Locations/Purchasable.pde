@@ -11,6 +11,7 @@ abstract class Purchasable extends Location {
     this.owned = owned;
   } 
 
+
   public int getValue() {
     return value;
   }
