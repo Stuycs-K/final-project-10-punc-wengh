@@ -21,6 +21,7 @@ abstract class Purchasable extends Location {
   public int getRent(){
     return rent;
   }
+
  
 
   // do when player class is implemented
