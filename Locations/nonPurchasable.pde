@@ -1,4 +1,4 @@
-abstract class nonPurchasable extends Locations {
+abstract class nonPurchasable extends Location {
   String name;
   int value;
   

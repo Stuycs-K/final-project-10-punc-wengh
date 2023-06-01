@@ -7,22 +7,22 @@ public class Board {
     for (int i = 0; i < Players.length; i++) {
       Players[i] = new Player("Player " + i);
     }
-
-<<<<<<< HEAD
-=======
+    
     //initialize locations
 
->>>>>>> PunDisplay
+    Locations.add(Start("Start"));
+    Locations.add(Property("Mediterranean Avenue","brown", 0, 60, 2));
+    Locations.add(Property("Baltic Avenue","brown",0 , 60, 4));
+    
+    
   }
   public Board(String names) {
     //initialize Players
     String[] name = names.split(",");
     for (int i = 0; i < Players.length; i++) {
-<<<<<<< HEAD
-      Players[i] = Player(names[i]);
-=======
       Players[i] = new Player(name[i]);
->>>>>>> PunDisplay
     }
   }
+  
+
 }
