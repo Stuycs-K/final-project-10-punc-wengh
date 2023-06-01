@@ -6,7 +6,7 @@ public class Utility extends Purchasable {
     super();
   }
   
-  public Utility(String name, String owner, int value, int fee) {
+  public Utility(String name, int value, int fee) {
     super(name, value, -1, fee);
   }
  
