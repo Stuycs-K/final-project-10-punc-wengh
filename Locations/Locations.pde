@@ -10,5 +10,11 @@ public class Location {
   public String getName() {
     return name;
   }
+<<<<<<< HEAD
 
  }
+=======
+ }
+
+}
+>>>>>>> 7cb96cff6535541a58643159a10d4f42a6333710

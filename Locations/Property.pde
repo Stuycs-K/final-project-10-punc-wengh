@@ -14,6 +14,7 @@ public class Property extends Purchasable {
   }
   
   public int levelUp() {
+<<<<<<< HEAD
     if (getColor().equals("red")) {
     }
     else if (getColor().equals("brown")) {
@@ -21,6 +22,15 @@ public class Property extends Purchasable {
     else if (getColor().equals("dark blue")){
       Player.withdraw(50);
       (Player.Purchasables).add(getName());
+=======
+    if (getColor().equals("red") {
+      this.withdraw(-1);
+      (this.Purchasables).add(getName());
+    }
+    else if (getColor().equals("brown")) {
+      this.withdraw(50);
+      (this.Purchasables).add(getName());
+>>>>>>> 7cb96cff6535541a58643159a10d4f42a6333710
     }
     else if (getColor().equals("light blue")) {
       Player.withdraw(50);
