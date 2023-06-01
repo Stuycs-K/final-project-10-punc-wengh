@@ -32,6 +32,10 @@ void setup() {
   }
   Players.add(new Player("Player 1"));
   Players.add(new Player("Player 2"));
+  Players.get(0).addOwned(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
+  Players.get(0).addOwned(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
+  Players.get(0).addOwned(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
+  
 }
 
 void update(int x, int y){
@@ -74,28 +78,36 @@ void draw() {
   text(Players.get(0).getPlayerName().toString(), 900, 50);
   fill(0);
   text("Balance: " +Players.get(0).getBalance(), 900, 80);
-  text("Die: " + d1 + " " + d2, 900, 110);
+  
+  text("Die: " + d1 + " " + d2, 900, 140);
+  
   if (Players.get(0).getPurchasables().size() == 0) {
-    text("Property: None", 900, 140);
-  } else {
+    text("Property: None", 900, 170);
+  } 
+  else {
+    text("Property:", 900, 170);
     for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-      text("Property: " + Players.get(0).getPurchasables().get(i), 900, 120);
+      text("" +Players.get(0).getPurchasables().get(i), 900, 200  + 30 * i);
     }
   }
-
+  text("Currently On: " + Locations.get(playerOneCounter).getName().toString(), 900, 110);
+  
   //player 2
   fill(0, 0, 255);
   circle(playerTwoX, playerTwoY, 50);
   text(Players.get(1).getPlayerName().toString(), 1300, 50);
   fill(0);
   text("Balance: " +Players.get(1).getBalance(), 1300, 80);
-  text("Die: " + d3 + " " + d4, 1300, 110);
+  
+  text("Die: " + d3 + " " + d4, 1300, 140);
   if (Players.get(1).getPurchasables().size() == 0) {
-    text("Property: None", 1300, 140);
+    text("Property: None", 1300, 170);
   }
+  
   else {
+    text("Property:", 1300, 170);
     for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
-      text("Property: " + Players.get(1).getPurchasables().get(i), 1300, 120);
+      text("" +Players.get(1).getPurchasables().get(i), 1300, 200 + 30 * i);
     }
   }
   text("Roll Die", 70, 960);
@@ -108,7 +120,8 @@ void draw() {
     fill(0, 0, 255);
     text(Players.get(1).getPlayerName().toString() + "(turn)", 1300, 50);
   }
-
+  fill(0);
+  text("Currently On: " + Locations.get(playerTwoCounter).getName().toString(), 1300, 110);
 }
 
 void mousePressed(){
@@ -139,8 +152,8 @@ void mousePressed(){
         playerOneCounter += 1;
         System.out.println(playerOneCounter);
       }
-      if (playerOneCounter >= 40){
-        playerOneCounter = 0;
+      if (playerOneCounter > 39){
+        playerOneCounter = playerOneCounter % 40;
       }
     }
     turn += 1;
@@ -172,7 +185,7 @@ void mousePressed(){
         playerTwoCounter += 1;
         System.out.println(playerOneCounter);
       }
-      if (playerTwoCounter >= 40){
+      if (playerTwoCounter == 40){
         playerTwoCounter = 0;
       }
     }
@@ -184,8 +197,6 @@ void mousePressed(){
 
 void addLocations() {
   Locations.add(new Start("Start"));
-  Locations.add(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
-  Locations.add(new Property("Baltic Avenue", "brown", 0, 60, 4, false));
   Locations.add(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
   Locations.add(new Chest("Community Chest", 0));
   Locations.add(new Property("Baltic Avenue", "brown", 0, 60, 4, false));
@@ -199,6 +210,7 @@ void addLocations() {
   Locations.add(new Property("St. Charles Place", "pink", 0, 140, 10, false));
   Locations.add(new Utility("Electric Company", 150, 0, (int)(Math.random() * 7) + (int)(Math.random() * 7), false));
   Locations.add(new Property("States Avenue", "pink", 0, 140, 10, false));
+  Locations.add(new Property("Virginia Avenue", "pink", 0, 160, 10, false));
   Locations.add(new Railroad("Pennsylvania Railroad", 200, 25, 0, false));
   Locations.add(new Property("St. James Place", "orange", 0, 180, 14, false));
   Locations.add(new Chest("Community Chest", 0));
