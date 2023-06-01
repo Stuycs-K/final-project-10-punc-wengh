@@ -8,21 +8,12 @@ public class Board {
       Players[i] = new Player("Player " + i);
     }
 
-<<<<<<< HEAD
-=======
-    //initialize locations
-
->>>>>>> PunDisplay
   }
   public Board(String names) {
     //initialize Players
     String[] name = names.split(",");
     for (int i = 0; i < Players.length; i++) {
-<<<<<<< HEAD
-      Players[i] = Player(names[i]);
-=======
       Players[i] = new Player(name[i]);
->>>>>>> PunDisplay
     }
   }
 }

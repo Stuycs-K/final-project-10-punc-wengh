@@ -3,7 +3,6 @@ public class Location {
 
   
   public Location(String name) {
-
     this.name = name;
   }
 
@@ -11,11 +10,5 @@ public class Location {
     return name;
   }
 
-<<<<<<< HEAD
 
  }
-=======
- }
-
- 
->>>>>>> PunDisplay
