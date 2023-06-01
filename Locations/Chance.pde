@@ -1,9 +1,7 @@
-public class Chance extends nonPurchasable {
+public class Chance extends Card {
+  String description;
 
-  public Chance(String name, int value) {
-    super(name, value);
-  }
-
- 
-  
+  public Chance(String description) {
+    super(description);
+  } 
 }

@@ -1,8 +1,8 @@
 abstract class Card extends nonPurchasable {
   String description;
   
-  public Card(String name, int value, String description) {
-    super(name, value);
+  public Card(String description) {
+    super("", -1);
     this.description = description;
   }
   
