@@ -23,6 +23,10 @@ public class Player{
   public int getBalance(){
     return balance;
   }
+  public ArrayList getPurchasables(){
+    return Purchasables;
+  }
+  
 
   public void deposit(int amount){
     balance += amount;
