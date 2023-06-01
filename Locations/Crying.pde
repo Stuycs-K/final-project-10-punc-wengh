@@ -152,8 +152,9 @@ void mousePressed(){
         playerOneCounter += 1;
         System.out.println(playerOneCounter);
       }
-      if (playerOneCounter > 39){
-        playerOneCounter = playerOneCounter % 40;
+      if (playerOneCounter == 40){
+        playerOneCounter = 0;
+        Players.get(0).deposit(200);
       }
     }
     turn += 1;
@@ -187,6 +188,7 @@ void mousePressed(){
       }
       if (playerTwoCounter == 40){
         playerTwoCounter = 0;
+        Players.get(1).deposit(200);
       }
     }
     turn -= 1;
