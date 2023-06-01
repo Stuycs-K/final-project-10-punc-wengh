@@ -11,3 +11,4 @@ public class Tax extends nonPurchasable {
   public void deduct() {
     this.withdraw(value);
   }
+}

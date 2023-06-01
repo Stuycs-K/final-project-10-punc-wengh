@@ -1,7 +1,7 @@
 abstract class Chance extends nonPurchasable {
 
-  public Chance() {
-    super(name);
+  public Chance(String name, int value) {
+    super(name, value);
   }
   
   public ArrayList addCards(ArrayList chanceCards, Card Cards){

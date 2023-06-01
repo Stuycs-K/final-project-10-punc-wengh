@@ -1,9 +1,9 @@
-public class Locations {
+public class Location {
   String name;
   
-  public Locations(){}
+  public Location(){}
   
-  public Locations(String name) {
+  public Location(String name) {
     this.name = name;
   }
   

@@ -4,8 +4,8 @@ public class Property extends Purchasable {
   
   public Property() {}
   
-  public Property(String name, String propColor, int level, int value, int rent) {
-    super(name, value, level, rent);
+  public Property(String name, String propColor, int level, int value, int rent, boolean owned) {
+    super(name, value, level, rent, owned);
     this.propColor = propColor;
   }
   
@@ -19,32 +19,33 @@ public class Property extends Purchasable {
     else if (getColor().equals("brown")) {
     }
     else if (getColor().equals("dark blue")){
-      this.withdraw(50);
-      (this.Purchasables).add(getName());
+      Player.withdraw(50);
+      (Player.Purchasables).add(getName());
     }
     else if (getColor().equals("light blue")) {
-      this.withdraw(50);
-      (this.Purchasables).add(getName());
+      Player.withdraw(50);
+      (Player.Purchasables).add(getName());
     }
     else if (getColor().equals("pink")) {
-      this.withdraw(100);
-      (this.Purchasables).add(getName());
+      Player.withdraw(100);
+      (Player.Purchasables).add(getName());
     }
     else if (getColor().equals("orange")) {
-      this.withdraw(100);
-      (this.Purchasables).add(getName());
+      Player.withdraw(100);
+      (Player.Purchasables).add(getName());
     }
     else if (getColor().equals("yellow")) {
-      this.withdraw(150);
-      (this.Purchasables).add(getName());
+      Player.withdraw(150);
+      (Player.Purchasables).add(getName());
     }
     else if (getColor().equals("green")) {
-      this.withdraw(150);
-      (this.Purchasables).add(getName());
+      Player.withdraw(150);
+      (Player.Purchasables).add(getName());
     }
     else {
-      this.withdraw(200);
-      (this.Purchasables).add(getName());
+      Player.withdraw(200);
+      (Player.Purchasables).add(getName());
     }
+
   }
 }
