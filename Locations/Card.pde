@@ -1,8 +1,9 @@
 abstract class Card extends nonPurchasable {
   String description;
+  boolean owned;
   
-  public Card(String name, String description) {
-    super(name, -1);
+  public Card(String name, String description, boolean owned) {
+    super(name, -1, owned);
     this.description = description;
   }
   

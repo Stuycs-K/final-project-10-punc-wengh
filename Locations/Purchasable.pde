@@ -4,10 +4,9 @@ public class Purchasable extends Location {
   boolean owned;
   
   public Purchasable(String name, int value, int level, int rent, boolean owned) {
-    super(name, value);
+    super(name, value, owned);
     this.level = level;
     this.rent = rent;
-    this.owned = owned;
   } 
   
 
@@ -22,7 +21,5 @@ public class Purchasable extends Location {
  
 
   // do when player class is implemented
-  public void setOwner(){
-    this.owned = true;
-  }
+
 }

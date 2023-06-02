@@ -3,7 +3,7 @@ public class Tax extends nonPurchasable {
   int value;
   
   public Tax(String name) {
-    super(name, 200);
+    super(name, 200, false);
   }
   
   public void deduct(Player player) {

@@ -140,7 +140,7 @@ void draw() {
   } else {
     text("Property:", 1300, 170);
     for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
-      text("" +Players.get(1).getPurchasables().get(i), 1300, 200 + 30 * i);
+      text("" +Players.get(1).getPurchasables().get(i).getName(), 1300, 200  + 30 * i);
     }
   }
   text("Roll Die", 70, 960);
@@ -226,19 +226,19 @@ void mousePressed() {
       turn -= 1;
     }
   }
-  if (buyOver && turn == 0) {
+  if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned()) {
     if (Locations.get(playerOneCounter) instanceof Purchasable) {
+      Locations.get(playerOneCounter).setOwned();
       Location toOwn = Locations.get(playerOneCounter);
       Players.get(0).addOwned(toOwn);
       Players.get(0).withdraw(toOwn.getValue());
     } 
   }
-   if (buyOver && turn != 0) {
+   if (buyOver && turn != 0 && !Locations.get(playerTwoCounter).getOwned()) {
       if (Locations.get(playerTwoCounter) instanceof Purchasable) {
-        System.out.println(playerTwoCounter);
+        Locations.get(playerTwoCounter).setOwned();
         Location toOwn = Locations.get(playerTwoCounter);
         Players.get(1).addOwned(toOwn);
-
         Players.get(1).withdraw(toOwn.getValue());
       }
     }
@@ -259,27 +259,27 @@ void mousePressed() {
     void addLocations() {
       Locations.add(new Start("Start"));
       Locations.add(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
-      Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size())));
+      Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size()), false));
       Locations.add(new Property("Baltic Avenue", "brown", 0, 60, 4, false));
       Locations.add(new Tax("Income Tax"));
       Locations.add(new Railroad("Reading Railroad", 200, 25, 0, false));
       Locations.add(new Property("Oriental Avenue", "light blue", 0, 100, 6, false));
-      Locations.add(new Chance("Chance", Chance.get((int)Math.random() * Chance.size())));
+      Locations.add(new Chance("Chance", Chance.get((int)Math.random() * Chance.size()), false));
       Locations.add(new Property("Vermont Avenue", "light blue", 0, 100, 6, false));
       Locations.add(new Property("Connecticut Avenue", "light blue", 0, 120, 8, false));
-      Locations.add(new Jail("Jail", 200));
+      Locations.add(new Jail("Jail", 200, false));
       Locations.add(new Property("St. Charles Place", "pink", 0, 140, 10, false));
       Locations.add(new Utility("Electric Company", 150, 0, (int)(Math.random() * 7) + (int)(Math.random() * 7), false));
       Locations.add(new Property("States Avenue", "pink", 0, 140, 10, false));
       Locations.add(new Property("Virginia Avenue", "pink", 0, 160, 10, false));
       Locations.add(new Railroad("Pennsylvania Railroad", 200, 25, 0, false));
       Locations.add(new Property("St. James Place", "orange", 0, 180, 14, false));
-      Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size())));
+      Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size()), false));
       Locations.add(new Property("Tennessee Avenue", "orange", 0, 180, 14, false));
       Locations.add(new Property("New York Avenue", "orange", 0, 200, 16, false));
       Locations.add(new Utility("Free Parking", 0, 0, 0, false));
       Locations.add(new Property("Kentucky Avenue", "red", 0, 220, 18, false));
-      Locations.add(new Chance("Chance", Chance.get((int)Math.random() * Chance.size())));
+      Locations.add(new Chance("Chance", Chance.get((int)Math.random() * Chance.size()), false));
       Locations.add(new Property("Indiana Avenue", "red", 0, 220, 18, false));
       Locations.add(new Property("Illinois Avenue", "red", 0, 240, 20, false));
       Locations.add(new Railroad("B.& O. Railroad", 200, 25, 0, false));
@@ -287,13 +287,13 @@ void mousePressed() {
       Locations.add(new Property("Ventnor Avenue", "yellow", 0, 260, 22, false));
       Locations.add(new Utility("Water Works", 150, 0, (int)(Math.random() * 7) + (int)(Math.random() * 7), false));
       Locations.add(new Property("Marvin Gardens", "yellow", 0, 280, 24, false));
-      Locations.add(new Jail("Go To Jail", 200));
+      Locations.add(new Jail("Go To Jail", 200, false));
       Locations.add(new Property("Pacific Avenue", "green", 0, 300, 26, false));
       Locations.add(new Property("North Carolina Avenue", "green", 0, 300, 26, false));
-      Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size())));
+      Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size()), false));
       Locations.add(new Property("Pennsylvania Avenue", "green", 0, 320, 28, false));
       Locations.add(new Railroad("Short Line", 200, 25, 0, false));
-      Locations.add(new Chance("Community Chest", Chance.get((int)Math.random() * Chance.size())));
+      Locations.add(new Chance("Community Chest", Chance.get((int)Math.random() * Chance.size()), false));
       Locations.add(new Property("Park Place", "blue", 0, 350, 35, false));
       Locations.add(new Tax("Luxury Tax"));
       Locations.add(new Property("Boardwalk", "blue", 0, 400, 50, false));
