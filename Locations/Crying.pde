@@ -37,7 +37,7 @@ void setup() {
   addChanceCards();
   addLocations();
   for (int i = 0; i < Locations.size(); i++) {
-    System.out.println(Locations.get(i).getName().toString());
+    System.out.println(Locations.get(i).getName());
   }
   Players.add(new Player("Player 1"));
   Players.add(new Player("Player 2"));
@@ -49,9 +49,14 @@ void setup() {
 void update(int x, int y) {
   if (overDice(diceX, diceY, diceWidth, diceHeight) ) {
     diceOver = true;
+    buyOver = false;
   }
-  if (overBuy(buyX, buyY, buyWidth, buyHeight)) {
+  else if (overBuy(buyX, buyY, buyWidth, buyHeight)) {
     buyOver = true;
+    diceOver = false;
+  }
+  else{
+    buyOver = diceOver = false;
   }
 }
 
@@ -62,6 +67,7 @@ boolean overDice(int x, int y, int width, int height) {
   } else {
     return false;
   }
+  
 }
 
 boolean overBuy(int x, int y, int width, int height) {
@@ -77,13 +83,12 @@ void draw() {
   update(mouseX, mouseY);
   background(255);
   image(board, 0, 0, 900, 900);
+  System.out.println(diceOver);
   if (diceOver) {
     fill(255, 255, 0);
   } else {
     fill(255);
   }
-  
-
 
   rect(diceX, diceY, diceWidth, diceHeight);
 
@@ -224,7 +229,8 @@ void mousePressed() {
       Location toOwn = Locations.get(playerOneCounter);
       Players.get(0).addOwned(toOwn);
       Players.get(0).withdraw(toOwn.getValue());
-    } else if (buyOver && turn != 0) {
+    } 
+   else if (buyOver && turn != 0) {
       if (Locations.get(playerTwoCounter) instanceof Purchasable) {
         Location toOwn = Locations.get(playerTwoCounter);
         Players.get(1).addOwned(toOwn);
