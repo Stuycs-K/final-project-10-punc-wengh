@@ -1,22 +1,39 @@
 # Work Log
 
-## GROUP MEMBER 1
+## GROUP MEMBER 1: Calvin Pun
 
-### date x
+### May 24, 2023
+Finished Purchasable class
 
-info
+### May 25, 2023
+Finished Player class and set up gameboard
 
-### date y
+### May 30, 2023
+Added cards features
 
-info
+### May 31, 2023
+Added player movement, player statistics, roll dice, and counter
+
+### June 1, 2023
+Added deposit after every "GO"
 
 
-## GROUP MEMBER 2
+## GROUP MEMBER 2: Hui Wen Weng
 
-### date x
+### May 23, 2023
+Finished Locations class
 
-info
+### May 24, 2023
+Finished nonPurchasable class
 
-### date y
+### May 25 2023
+Finished Railroad and Utility classes
 
-info
+### May 26, 2023
+Finished Property class
+
+### May 31, 2023
+Finished Jail and Tax classes
+
+### June 1, 2023
+Added Buy option to game play
