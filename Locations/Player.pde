@@ -24,7 +24,7 @@ public class Player{
   public int getBalance(){
     return balance;
   }
-  public ArrayList getPurchasables(){
+  public ArrayList<Location> getPurchasables(){
     return Purchasables;
   }
   

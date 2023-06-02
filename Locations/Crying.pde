@@ -111,7 +111,7 @@ void draw() {
   } else {
     text("Property:", 900, 170);
     for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-      text("" +Players.get(0).getPurchasables().get(i), 900, 200  + 30 * i);
+      text("" +Players.get(0).getPurchasables().get(i).getName(), 900, 200  + 30 * i);
     }
   }
   text("Currently On: " + Locations.get(playerOneCounter).getName().toString(), 900, 110);
