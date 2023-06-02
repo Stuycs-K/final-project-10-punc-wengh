@@ -3,7 +3,7 @@ abstract class nonPurchasable extends Location {
   int value;
   
   public nonPurchasable(String name, int value) {
-    super(name);
+    super(name, value);
     this.value = value;
   }
   

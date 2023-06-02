@@ -1,7 +1,7 @@
 public class Player{
   String name, currentLocation;
   int balance;
-  ArrayList <Purchasable>Purchasables;
+  ArrayList <Location> Purchasables;
   ArrayList<String> cards;
 
   
@@ -9,14 +9,14 @@ public class Player{
     name = "player";
     balance = 1500;
     currentLocation = "start";
-    Purchasables = new ArrayList<Purchasable>();
+    Purchasables = new ArrayList<Location>();
   }
 
   public Player(String enteredName){
     name = enteredName;
     balance = 1500;
     currentLocation = "start";
-    Purchasables = new ArrayList<Purchasable>();
+    Purchasables = new ArrayList<Location>();
   }
   public String getPlayerName(){
     return name;
@@ -37,7 +37,7 @@ public class Player{
     balance -= amount;
   }
   
-  public ArrayList addOwned(Purchasable yes){
+  public ArrayList addOwned(Location yes){
     Purchasables.add(yes);
     return Purchasables;
   }

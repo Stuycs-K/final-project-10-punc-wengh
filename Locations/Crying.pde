@@ -10,6 +10,11 @@ int diceX = 20;
 int diceY = 910;
 int diceWidth = 200;
 int diceHeight = 80;
+boolean buyOver = false;
+int buyX = 230;
+int buyY = 910;
+int buyWidth = 200;
+int buyHeight = 80;
 int turn = 0;
 int d1 = 0;
 int d2 = 0;
@@ -28,6 +33,8 @@ void setup() {
   size(1800, 1000);
 
   board = loadImage("monopoly.jpg");
+  addChestCards();
+  addChanceCards();
   addLocations();
   for (int i = 0; i < Locations.size(); i++) {
     System.out.println(Locations.get(i).getName().toString());
@@ -42,12 +49,22 @@ void setup() {
 void update(int x, int y) {
   if (overDice(diceX, diceY, diceWidth, diceHeight) ) {
     diceOver = true;
-  } else {
-    diceOver = false;
+  }
+  if (overBuy(buyX, buyY, buyWidth, buyHeight)) {
+    buyOver = true;
   }
 }
 
 boolean overDice(int x, int y, int width, int height) {
+  if (mouseX >= x && mouseX <= x+width &&
+    mouseY >= y && mouseY <= y+height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+boolean overBuy(int x, int y, int width, int height) {
   if (mouseX >= x && mouseX <= x+width &&
     mouseY >= y && mouseY <= y+height) {
     return true;
@@ -89,6 +106,9 @@ void draw() {
     }
   }
   text("Currently On: " + Locations.get(playerOneCounter).getName().toString(), 900, 110);
+  if (Locations.get(playerOneCounter) instanceof Purchasable) {
+    //code here
+  }
 
   //player 2
   fill(0, 0, 255);
@@ -116,6 +136,9 @@ void draw() {
   }
   fill(0);
   text("Currently On: " + Locations.get(playerTwoCounter).getName().toString(), 1300, 110);
+  if (Locations.get(playerTwoCounter) instanceof Purchasable) {
+    //code here
+  }
 }
 
 void mousePressed() {
@@ -147,6 +170,11 @@ void mousePressed() {
           Players.get(0).deposit(200);
         }
       }
+      if (buyOver && Locations.get(playerOneCounter) instanceof Purchasable) {
+        Location toOwn = Locations.get(playerOneCounter);
+        Players.get(0).addOwned(toOwn);
+        Players.get(0).withdraw(toOwn.getValue());
+      }
       turn += 1;
     } else {
       d3 = (int)(random(1, 7));
@@ -176,6 +204,11 @@ void mousePressed() {
         }
       }
       turn -= 1;
+      if (buyOver && Locations.get(playerOneCounter) instanceof Purchasable) {
+        Location toOwn = Locations.get(playerOneCounter);
+        Players.get(1).addOwned(toOwn);
+        Players.get(1).withdraw(toOwn.getValue());
+      }
     }
   }
 }
