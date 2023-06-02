@@ -9,7 +9,10 @@ abstract class Purchasable extends Location {
     this.rent = rent;
     this.owned = owned;
   } 
-
+  
+  public String getName() {
+    return name;
+  }
 
   public int getValue() {
     return value;

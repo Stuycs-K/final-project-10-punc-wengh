@@ -10,7 +10,6 @@ public class Location {
   public String getName() {
     return name;
   }
-  
   public int getValue() {
     return value;
   }
