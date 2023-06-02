@@ -5,7 +5,7 @@ public class Railroad extends Purchasable {
   
 
   public Railroad(String name, int value, int rent, int level, boolean owned) {
-    super(name, value, level, rent, owned);
+    super(name, value, rent, level, owned);
   }
 
 }

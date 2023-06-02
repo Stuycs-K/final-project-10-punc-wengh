@@ -39,6 +39,9 @@ void setup() {
   for (int i = 0; i < Locations.size(); i++) {
     System.out.println(Locations.get(i).getName());
   }
+    for (int i = 0; i < Locations.size(); i++) {
+    System.out.println(Locations.get(i).getValue());
+  }
   Players.add(new Player("Player 1"));
   Players.add(new Player("Player 2"));
 //  Players.get(0).addOwned(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
@@ -83,7 +86,6 @@ void draw() {
   update(mouseX, mouseY);
   background(255);
   image(board, 0, 0, 900, 900);
-  System.out.println(diceOver);
   if (diceOver) {
     fill(255, 255, 0);
   } else {
@@ -230,14 +232,17 @@ void mousePressed() {
       Players.get(0).addOwned(toOwn);
       Players.get(0).withdraw(toOwn.getValue());
     } 
-   else if (buyOver && turn != 0) {
+  }
+   if (buyOver && turn != 0) {
       if (Locations.get(playerTwoCounter) instanceof Purchasable) {
+        System.out.println(playerTwoCounter);
         Location toOwn = Locations.get(playerTwoCounter);
         Players.get(1).addOwned(toOwn);
+
         Players.get(1).withdraw(toOwn.getValue());
       }
     }
-  }
+  
 }
     void addChestCards() {
       Chest.add("FROM SALE OF STOCK. YOU GET $50.");
