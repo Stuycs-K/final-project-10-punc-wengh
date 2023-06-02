@@ -1,4 +1,4 @@
-abstract class Purchasable extends Location {
+public class Purchasable extends Location {
   String name;
   int value, rent, level;
   boolean owned;
@@ -10,8 +10,6 @@ abstract class Purchasable extends Location {
     this.owned = owned;
   } 
   
-
-
   public int getValue() {
     return value;
   }

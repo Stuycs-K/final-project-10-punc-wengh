@@ -2,13 +2,9 @@ public class Property extends Purchasable {
   String name, propColor;
   int level, value, rent;
 
-  public Property(String name, String propColor, int level, int value, int rent, boolean owned) {
+  public Property(String name, int level, int value, int rent, boolean owned) {
     super(name, value, level, rent, owned);
-    this.propColor = propColor;
-  }
-  
-  public int getValue() {
-    return value;
+    //this.propColor = propColor;
   }
   
   public String getColor() {
