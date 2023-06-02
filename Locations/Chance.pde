@@ -1,7 +1,8 @@
 public class Chance extends Card {
   String description;
-
-  public Chance(String description) {
-    super("Chance", description);
+  String name;
+  public Chance(String name, String description) {
+    super(name, description);
+    
   } 
 }
