@@ -6,8 +6,11 @@ public class Property extends Purchasable {
     super(name, value, level, rent, owned);
     this.propColor = propColor;
   }
-
-
+  
+  public int getValue() {
+    return value;
+  }
+  
   public String getColor() {
     return propColor;
   }

@@ -227,17 +227,17 @@ void mousePressed() {
   if (buyOver && turn == 0) {
     if (Locations.get(playerOneCounter) instanceof Purchasable) {
       Location toOwn = Locations.get(playerOneCounter);
-      Players.get(0).addOwned(toOwn);
       Players.get(0).withdraw(toOwn.getValue());
+      Players.get(0).addOwned(toOwn);
     } 
+  }
    else if (buyOver && turn != 0) {
       if (Locations.get(playerTwoCounter) instanceof Purchasable) {
         Location toOwn = Locations.get(playerTwoCounter);
-        Players.get(1).addOwned(toOwn);
         Players.get(1).withdraw(toOwn.getValue());
+        Players.get(1).addOwned(toOwn);
       }
     }
-  }
 }
     void addChestCards() {
       Chest.add("FROM SALE OF STOCK. YOU GET $50.");
@@ -255,7 +255,7 @@ void mousePressed() {
       Locations.add(new Start("Start"));
       Locations.add(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
       Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size())));
-      Locations.add(new Property("Baltic Avenue", "brown", 0, 60, 4, false));
+      Locations.add(new Property("Baltic Avenue", "brown", -1, 60, 4, false));
       Locations.add(new Tax("Income Tax"));
       Locations.add(new Railroad("Reading Railroad", 200, 25, 0, false));
       Locations.add(new Property("Oriental Avenue", "light blue", 0, 100, 6, false));
