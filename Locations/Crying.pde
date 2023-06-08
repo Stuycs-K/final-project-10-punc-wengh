@@ -34,7 +34,7 @@ int playerOneCounter = 0;
 int playerTwoCounter = 0;
 int countdown;
 boolean oneRolled = false;
-boolean twoROlled = false;
+boolean twoRolled = false;
 
 void setup() {
   size(1800, 1000);
@@ -61,11 +61,17 @@ void update(int x, int y) {
   if (overDice(diceX, diceY, diceWidth, diceHeight) ) {
     diceOver = true;
     buyOver = false;
+    endOver = false;
   } else if (overBuy(buyX, buyY, buyWidth, buyHeight)) {
     buyOver = true;
     diceOver = false;
+    endOver = false;
+  } else if (overEnd(endX, endY, endWidth, endHeight)) {
+    endOver = true;
+    buyOver = false;
+    diceOver = false;
   } else {
-    buyOver = diceOver = false;
+    buyOver = diceOver = endOver = false;
   }
 }
 
@@ -79,6 +85,15 @@ boolean overDice(int x, int y, int width, int height) {
 }
 
 boolean overBuy(int x, int y, int width, int height) {
+  if (mouseX >= x && mouseX <= x+width &&
+    mouseY >= y && mouseY <= y+height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+boolean overEnd(int x, int y, int width, int height) {
   if (mouseX >= x && mouseX <= x+width &&
     mouseY >= y && mouseY <= y+height) {
     return true;
@@ -105,77 +120,104 @@ void draw() {
   circle(playerOneX, playerOneY, 50);
   //player 1
   circle(playerOneX, playerOneY, 50);
-  if (turn == 0){
-  fill(255, 0, 0);
-  circle(playerOneX, playerOneY, 50);
-  text(Players.get(0).getPlayerName().toString(), 950, 50);
-  fill(0);
-  text("Balance: " +Players.get(0).getBalance(), 950, 80);
-
-  text("Die: " + d1 + " " + d2, 950, 140);
-
-  if (Players.get(0).getPurchasables().size() == 0) {
-    text("Property: None", 950, 170);
-  } else {
-    text("Property:", 950, 170);
-    for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-      text("" +Players.get(0).getPurchasables().get(i).getName(), 950, 200  + 30 * i);
+  if (turn == 0) {
+    if (oneRolled == true) {
+      if (endOver) {
+        fill(255, 0, 0);
+      } else {
+        fill(255);
+      }
+      rect(endX, endY, endWidth, endHeight);
+      fill(0);
+      text("End Turn", 970, 960);
     }
-  }
-  text("Roll Die", 70, 960);
-  text("Currently On: " + Locations.get(playerOneCounter).getName().toString() + " (" + Locations.get(playerOneCounter).getValue() + ")", 950, 110);
-  if (Locations.get(playerOneCounter) instanceof Purchasable) {
-
-    if (buyOver) {
-      fill(255, 255, 0);
-    } else {
-      fill(255);
-    }
-    rect(buyX, buyY, buyWidth, buyHeight);
+    fill(255, 0, 0);
+    circle(playerOneX, playerOneY, 50);
+    text(Players.get(0).getPlayerName().toString(), 950, 50);
     fill(0);
-    text("Buy", 300, 960);
-  }
+    text("Balance: " +Players.get(0).getBalance(), 950, 80);
+
+    text("Die: " + d1 + " " + d2, 950, 140);
+
+    if (Players.get(0).getPurchasables().size() == 0) {
+      text("Property: None", 950, 170);
+    } else {
+      text("Property:", 950, 170);
+      for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
+        text("" +Players.get(0).getPurchasables().get(i).getName(), 950, 200  + 30 * i);
+      }
+    }
+    text("Roll Die", 70, 960);
+    text("Currently On: " + Locations.get(playerOneCounter).getName().toString() + " (" + Locations.get(playerOneCounter).getValue() + ")", 950, 110);
+    if (Locations.get(playerOneCounter) instanceof Purchasable && !Locations.get(playerOneCounter).getOwned()) {
+
+      if (buyOver) {
+        fill(255, 255, 0);
+      } else {
+        fill(255);
+      }
+      rect(buyX, buyY, buyWidth, buyHeight);
+      fill(0);
+      text("Buy", 300, 960);
+    }
   }
 
   //player 2
   fill(0, 0, 255);
   circle(playerTwoX, playerTwoY, 50);
-  if (turn == 1){
-  fill(0, 0, 255);
-  circle(playerTwoX, playerTwoY, 50);
-  text(Players.get(1).getPlayerName().toString(), 950, 50);
-  fill(0);
-  text("Balance: " +Players.get(1).getBalance(), 950, 80);
-
-  text("Die: " + d3 + " " + d4, 950, 140);
-  if (Players.get(1).getPurchasables().size() == 0) {
-    text("Property: None", 950, 170);
-  } else {
-    text("Property:", 950, 170);
-    for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
-      text("" +Players.get(1).getPurchasables().get(i).getName(), 950, 200  + 30 * i);
+  if (turn == 1) {
+    if (oneRolled == false) {
+      if (endOver) {
+        fill(255, 0, 0);
+      } else {
+        fill(255);
+      }
+      rect(endX, endY, endWidth, endHeight);
+      fill(0);
+      text("End Turn", 970, 960);
     }
-  }
-  text("Roll Die", 70, 960);
-  fill(0);
-  text("Currently On: " + Locations.get(playerTwoCounter).getName().toString(), 950, 110);
-  if (Locations.get(playerTwoCounter) instanceof Purchasable) {
-    if (buyOver) {
-      fill(255, 255, 0);
-    } else {
-      fill(255);
-    }
-    rect(buyX, buyY, buyWidth, buyHeight);
+    fill(0, 0, 255);
+    circle(playerTwoX, playerTwoY, 50);
+    text(Players.get(1).getPlayerName().toString(), 950, 50);
     fill(0);
-    text("Buy", 300, 960);
-  }
+    text("Balance: " +Players.get(1).getBalance(), 950, 80);
+
+    text("Die: " + d3 + " " + d4, 950, 140);
+    if (Players.get(1).getPurchasables().size() == 0) {
+      text("Property: None", 950, 170);
+    } else {
+      text("Property:", 950, 170);
+      for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
+        text("" +Players.get(1).getPurchasables().get(i).getName(), 950, 200  + 30 * i);
+      }
+    }
+    text("Roll Die", 70, 960);
+    fill(0);
+    text("Currently On: " + Locations.get(playerTwoCounter).getName().toString(), 950, 110);
+    if (Locations.get(playerTwoCounter) instanceof Purchasable && !Locations.get(playerTwoCounter).getOwned()) {
+      if (buyOver) {
+        fill(255, 255, 0);
+      } else {
+        fill(255);
+      }
+      rect(buyX, buyY, buyWidth, buyHeight);
+      fill(0);
+      text("Buy", 300, 960);
+    }
   }
 }
 
 void mousePressed() {
+  if (endOver && turn == 0 && oneRolled) {
+    turn = 1;
+    System.out.println(turn);
+  } else if (endOver && turn == 1 && twoRolled) {
+    turn = 0;
+    System.out.println(turn);
+  }
 
   if (diceOver) {
-    if (turn == 0) {
+    if (turn == 0 && !oneRolled) {
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
       move = d1 + d2;
@@ -186,19 +228,14 @@ void mousePressed() {
             playerOneCounter += 1;
             System.out.println(playerOneCounter);
           } else if (playerOneCounter >= 10 && playerOneCounter < 20) {
-
             playerOneY -= 73;
-
             playerOneCounter += 1;
             System.out.println(playerOneCounter);
           } else if (playerOneCounter >= 20 && playerOneCounter < 30) {
-
             playerOneX += 76;
-
             playerOneCounter += 1;
             System.out.println(playerOneCounter);
           } else if (playerOneCounter >= 30 && playerOneCounter < 40) {
-
             playerOneY += 73;
             playerOneCounter += 1;
             System.out.println(playerOneCounter);
@@ -209,15 +246,16 @@ void mousePressed() {
           }
         }
       }
+
       for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
         if (Locations.get(playerOneCounter).getName().equals(Players.get(1).getPurchasables().get(i).getName())) {
           Players.get(0).withdraw(Players.get(1).getPurchasables().get(i).getValue());
           Players.get(1).deposit(Players.get(1).getPurchasables().get(i).getValue());
-          break;
         }
       }
-      turn += 1;
-    } else {
+      oneRolled = true;
+      twoRolled = false;
+    } else if (turn == 1 && !twoRolled) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
       move = d3 + d4;
@@ -248,13 +286,13 @@ void mousePressed() {
         if (Locations.get(playerOneCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
           Players.get(1).withdraw(Players.get(0).getPurchasables().get(i).getValue());
           Players.get(0).deposit(Players.get(0).getPurchasables().get(i).getValue());
-
-          break;
         }
       }
-      turn -= 1;
+      oneRolled = false;
+      twoRolled = true;
     }
   }
+
   if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned()) {
     if (Locations.get(playerOneCounter) instanceof Purchasable) {
       Locations.get(playerOneCounter).setOwned();
