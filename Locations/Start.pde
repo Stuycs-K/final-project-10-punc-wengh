@@ -4,7 +4,7 @@ public class Start extends nonPurchasable {
 
   
   public Start(String name) {
-    super(name, 200, false);
+    super(name, 0, false);
   }
   
   public void grant(Player player) {
