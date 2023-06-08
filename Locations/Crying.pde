@@ -193,7 +193,7 @@ void draw() {
     }
     text("Roll Die", 70, 960);
     fill(0);
-    text("Currently On: " + Locations.get(playerTwoCounter).getName().toString(), 950, 110);
+    text("Currently On: " + Locations.get(playerTwoCounter).getName().toString() + " (" + Locations.get(playerTwoCounter).getValue() + ")", 950, 110);
     if (Locations.get(playerTwoCounter) instanceof Purchasable && !Locations.get(playerTwoCounter).getOwned()) {
       if (buyOver) {
         fill(255, 255, 0);
