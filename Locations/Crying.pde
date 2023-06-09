@@ -121,14 +121,19 @@ boolean overStart(int x, int y, int width, int height) {
 
 void draw() {
   background(background);
+  PImage welcome = loadImage("welcome.png");
+  image(welcome, width/4, height/22, width/2, height/2);
   rectMode(CENTER);
   fill(255); 
   rect(width/2, height/2, startWidth, startHeight);
   fill(0);
-  text("Start", width/2, height/2);
+  textSize(40);
+  text("Start", width/2, height/2+10);
   textAlign(CENTER);
   update(mouseX, mouseY);
+  
   if (state == 1) {
+    background(background);
     image(board, 0, 0, 900, 900);
     if (diceOver) {
       fill(255, 255, 0);
@@ -141,6 +146,7 @@ void draw() {
     textSize(30);
     fill(255, 0, 0);
     circle(playerOneX, playerOneY, 50);
+    
     //player 1
     circle(playerOneX, playerOneY, 50);
     if (turn == 0) {
@@ -156,22 +162,22 @@ void draw() {
       }
       fill(255, 0, 0);
       circle(playerOneX, playerOneY, 50);
-      text(Players.get(0).getPlayerName().toString(), 950, 50);
+      text(Players.get(0).getPlayerName().toString(), width/2+350, 50);
       fill(0);
-      text("Balance: " +Players.get(0).getBalance(), 950, 80);
+      text("Balance: " +Players.get(0).getBalance(), width/2+350, 80);
 
-      text("Die: " + d1 + " " + d2, 950, 140);
+      text("Die: " + d1 + " " + d2, width/2+350, 140);
 
       if (Players.get(0).getPurchasables().size() == 0) {
-        text("Property: None", 950, 170);
+        text("Property: None", width/2+350, 170);
       } else {
-        text("Property:", 950, 170);
+        text("Property:", width/2+350, 170);
         for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-          text("" +Players.get(0).getPurchasables().get(i).getName(), 950, 200  + 30 * i);
+          text("" +Players.get(0).getPurchasables().get(i).getName(), width/2+350, 200  + 30 * i);
         }
       }
       text("Roll Die", 70, 960);
-      text("Currently On: " + Locations.get(playerOneCounter).getName().toString() + " ($" + Locations.get(playerOneCounter).getValue() + ")", 950, 110);
+      text("Currently On: " + Locations.get(playerOneCounter).getName().toString() + " ($" + Locations.get(playerOneCounter).getValue() + ")", width/2+350, 110);
       if (Locations.get(playerOneCounter) instanceof Purchasable && !Locations.get(playerOneCounter).getOwned()) {
 
         if (buyOver) {
@@ -201,22 +207,22 @@ void draw() {
       }
       fill(0, 0, 255);
       circle(playerTwoX, playerTwoY, 50);
-      text(Players.get(1).getPlayerName().toString(), 950, 50);
+      text(Players.get(1).getPlayerName().toString(), width/2+350, 50);
       fill(0);
-      text("Balance: " +Players.get(1).getBalance(), 950, 80);
+      text("Balance: " +Players.get(1).getBalance(), width/2+350, 80);
 
-      text("Die: " + d3 + " " + d4, 950, 140);
+      text("Die: " + d3 + " " + d4, width/2+350, 140);
       if (Players.get(1).getPurchasables().size() == 0) {
-        text("Property: None", 950, 170);
+        text("Property: None", width/2+350, 170);
       } else {
-        text("Property:", 950, 170);
+        text("Property:", width/2+350, 170);
         for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
-          text("" +Players.get(1).getPurchasables().get(i).getName(), 950, 200  + 30 * i);
+          text("" +Players.get(1).getPurchasables().get(i).getName(), width/2+350, 200  + 30 * i);
         }
       }
       text("Roll Die", 70, 960);
       fill(0);
-      text("Currently On: " + Locations.get(playerTwoCounter).getName().toString() + " ($" + Locations.get(playerTwoCounter).getValue() + ")", 950, 110);
+      text("Currently On: " + Locations.get(playerTwoCounter).getName().toString() + " ($" + Locations.get(playerTwoCounter).getValue() + ")", width/2+350, 110);
       if (Locations.get(playerTwoCounter) instanceof Purchasable && !Locations.get(playerTwoCounter).getOwned()) {
         if (buyOver) {
           fill(255, 255, 0);
