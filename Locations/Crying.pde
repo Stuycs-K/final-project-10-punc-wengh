@@ -1,3 +1,4 @@
+//initiate x and y vars, replace the parameters
 PImage board;
 PImage background;
 int state = 0;
@@ -5,21 +6,12 @@ ArrayList <Location> Locations = new ArrayList<Location>();
 ArrayList <String> Chest = new ArrayList<String>();
 ArrayList <String> Chance = new ArrayList<String>();
 ArrayList <Player> Players = new ArrayList<Player>();
+int buttonWidth = 160;
+int buttonHeight = 80;
 boolean diceOver = false;
-int diceX = 20;
-int diceY = 910;
-int diceWidth = 200;
-int diceHeight = 80;
+int diceX, diceY, buyX, buyY, endX, endY;
 boolean buyOver = false;
-int buyX = 230;
-int buyY = 910;
-int buyWidth = 200;
-int buyHeight = 80;
 boolean endOver = false;
-int endX = 930;
-int endY = 910;
-int endWidth = 200;
-int endHeight = 80;
 boolean startOver = false;
 int startX = displayWidth / 2;
 int startY = displayHeight / 2;
@@ -66,15 +58,15 @@ void update(int x, int y) {
   if (overStart(startX, startY, startWidth, startHeight)) {
     startOver = true;
   }
-  if (overDice(diceX, diceY, diceWidth, diceHeight) ) {
+  if (overDice(diceX, diceY, buttonWidth, buttonHeight)) {
     diceOver = true;
     buyOver = false;
     endOver = false;
-  } else if (overBuy(buyX, buyY, buyWidth, buyHeight)) {
+  } else if (overBuy(buyX, buyY, buttonWidth, buttonHeight)) {
     buyOver = true;
     diceOver = false;
     endOver = false;
-  } else if (overEnd(endX, endY, endWidth, endHeight)) {
+  } else if (overEnd(endX, endY, buttonWidth, buttonHeight)) {
     endOver = true;
     buyOver = false;
     diceOver = false;
@@ -124,29 +116,31 @@ void draw() {
   PImage welcome = loadImage("welcome.png");
   image(welcome, width/4, height/22, width/2, height/2);
   rectMode(CENTER);
-  fill(255); 
+  fill(255);
   rect(width/2, height/2, startWidth, startHeight);
   fill(0);
   textSize(40);
   text("Start", width/2, height/2+10);
   textAlign(CENTER);
   update(mouseX, mouseY);
-  
+
   if (state == 1) {
     background(background);
-    image(board, 0, 0, 900, 900);
+    image(board, width/60, height/30, 900, 900);
     if (diceOver) {
       fill(255, 255, 0);
     } else {
       fill(255);
     }
 
-    rect(diceX, diceY, diceWidth, diceHeight);
+    rect(width/2+width/9, diceY, buttonWidth, buttonHeight);
+    rect(width/2+width/9+3*buttonWidth+width/50+width/100, diceY, buttonWidth, buttonHeight);
+    text("End Game", width/2+width/9+3*buttonWidth+width/50+width/100, diceY+10);
 
     textSize(30);
     fill(255, 0, 0);
     circle(playerOneX, playerOneY, 50);
-    
+
     //player 1
     circle(playerOneX, playerOneY, 50);
     if (turn == 0) {
@@ -156,9 +150,9 @@ void draw() {
         } else {
           fill(255);
         }
-        rect(endX, endY, endWidth, endHeight);
+        rect(width/2+width/9+buttonWidth+width/100, endY, buttonWidth, buttonHeight);
         fill(0);
-        text("End Turn", 970, 960);
+        text("End Turn", width/2+width/9+buttonWidth+width/100, endY+10);
       }
       fill(255, 0, 0);
       circle(playerOneX, playerOneY, 50);
@@ -176,7 +170,7 @@ void draw() {
           text("" +Players.get(0).getPurchasables().get(i).getName(), width/2+350, 200  + 30 * i);
         }
       }
-      text("Roll Die", 70, 960);
+      text("Roll Die", width/2+width/9, diceY+10);
       text("Currently On: " + Locations.get(playerOneCounter).getName().toString() + " ($" + Locations.get(playerOneCounter).getValue() + ")", width/2+350, 110);
       if (Locations.get(playerOneCounter) instanceof Purchasable && !Locations.get(playerOneCounter).getOwned()) {
 
@@ -185,9 +179,9 @@ void draw() {
         } else {
           fill(255);
         }
-        rect(buyX, buyY, buyWidth, buyHeight);
+        rect(width/2+width/9+2*buttonWidth+width/50, buyY, buttonWidth, buttonWidth);
         fill(0);
-        text("Buy", 300, 960);
+        text("Buy", width/2+width/9+2*buttonWidth+width/50, buyY+10);
       }
     }
 
@@ -201,9 +195,9 @@ void draw() {
         } else {
           fill(255);
         }
-        rect(endX, endY, endWidth, endHeight);
+        rect(width/2+width/9+buttonWidth+width/100, endY, buttonWidth, buttonHeight);
         fill(0);
-        text("End Turn", 970, 960);
+        text("End Turn", width/2+width/9+buttonWidth+width/100, endY+10);
       }
       fill(0, 0, 255);
       circle(playerTwoX, playerTwoY, 50);
@@ -220,7 +214,7 @@ void draw() {
           text("" +Players.get(1).getPurchasables().get(i).getName(), width/2+350, 200  + 30 * i);
         }
       }
-      text("Roll Die", 70, 960);
+      text("Roll Die", width/2+width/9, diceY+10);
       fill(0);
       text("Currently On: " + Locations.get(playerTwoCounter).getName().toString() + " ($" + Locations.get(playerTwoCounter).getValue() + ")", width/2+350, 110);
       if (Locations.get(playerTwoCounter) instanceof Purchasable && !Locations.get(playerTwoCounter).getOwned()) {
@@ -229,9 +223,9 @@ void draw() {
         } else {
           fill(255);
         }
-        rect(buyX, buyY, buyWidth, buyHeight);
+        rect(width/2+width/9+2*buttonWidth+width/50, buyY, buttonWidth, buttonHeight);
         fill(0);
-        text("Buy", 300, 960);
+        text("Buy", width/2+width/9+2*buttonWidth+width/50, buyY+10);
       }
     }
   }
