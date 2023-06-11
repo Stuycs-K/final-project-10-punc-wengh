@@ -200,7 +200,9 @@ void draw() {
 
     if (!played){
     file = new SoundFile(this, "elevator music.wav");
+    file.amp(0.25);
     file.play();
+    file.loop();
     played = true;
     
   }
@@ -237,8 +239,11 @@ void draw() {
   else if (state == 1) {
     file.stop();
     if (!played2){
+      
     file2 = new SoundFile(this, "swing.wav");
+    file2.amp(0.25);
     file2.play();
+    file2.loop();
     played2 = true;
     played = false;
     }
@@ -410,8 +415,9 @@ void draw() {
 
     if (!played3){
     file3 = new SoundFile(this, "end.wav");
+    file3.amp(0.1);
     file3.jump(10);
-    file3.amp(0.25);
+    file3.loop();
     played3 = true;
 
     }
