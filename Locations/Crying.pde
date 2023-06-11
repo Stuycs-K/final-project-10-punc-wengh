@@ -174,23 +174,24 @@ boolean overJailCard(int x, int y, int width, int height) {
 }
 
 void draw() {
-  background(background);
-  PImage welcome = loadImage("welcome.png");
-  image(welcome, width/4, height/22, width/2, height/2);
-
-  fill(255);
-  if (startOver) {
-    fill(255, 255, 0);
-  } else {
-    fill(255);
-  }
-  rect(startX, startY, startWidth, startHeight);
-  fill(0);
-  textSize(40);
-  text("Start", width/2, height/2+10);
-  textAlign(CENTER);
   update(mouseX, mouseY);
-
+  if (state == 0) {
+    background(background);
+    PImage welcome = loadImage("welcome.png");
+    image(welcome, width/4, height/22, width/2, height/2);
+  
+    fill(255);
+    if (startOver) {
+      fill(255, 255, 0);
+    } else {
+      fill(255);
+    }
+    rect(startX, startY, startWidth, startHeight);
+    fill(0);
+    textSize(40);
+    text("Start", width/2, height/2+10);
+    textAlign(CENTER);
+  }
 
   if (state == 1) {
     textSize(30);
