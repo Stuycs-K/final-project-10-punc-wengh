@@ -166,7 +166,7 @@ void draw() {
     } else {
       fill(255);
     }
-    rect(diceX, diceY, buttonWidth, buttonHeight);
+    
     fill(0);
     text("End Game", 0, 0);
 
@@ -176,7 +176,7 @@ void draw() {
 
     //player 1
     if (turn == 0) {
-      if (oneRolled == true) {
+      if (oneRolled) {
         if (endOver) {
           fill(255, 0, 0);
         } else {
@@ -185,6 +185,16 @@ void draw() {
         rect(endX, endY, buttonWidth, buttonHeight);
         fill(0);
         text("End Turn", endX + 100, endY + 50);
+      }
+      else{
+        if (diceOver) {
+          fill(255, 255, 0);
+        } else {
+          fill(255);
+        }
+        rect(diceX, diceY, buttonWidth, buttonHeight);
+        fill(0);
+        text("Roll Die", diceX + 100, diceY + 50);
       }
       fill(255, 0, 0);
       circle(playerOneX, playerOneY, 50);
@@ -204,7 +214,7 @@ void draw() {
           text("" +Players.get(0).getPurchasables().get(i).getName(), width/2+350, 260  + 30 * i);
         }
       }
-      text("Roll Die", diceX + 100, diceY + 50);
+
       text("Currently On: " + Locations.get(playerOneCounter).getName().toString() + " ($" + Locations.get(playerOneCounter).getValue() + ")", width/2+350, 110);
       if (Locations.get(playerOneCounter) instanceof Purchasable && !Locations.get(playerOneCounter).getOwned()) {
 
@@ -233,7 +243,7 @@ void draw() {
     fill(0, 0, 255);
     circle(playerTwoX, playerTwoY, 50);
     if (turn == 1) {
-      if (oneRolled == false) {
+      if (!oneRolled) {
         if (endOver) {
           fill(255, 0, 0);
         } else {
@@ -242,6 +252,16 @@ void draw() {
         rect(endX, endY, buttonWidth, buttonHeight);
         fill(0);
         text("End Turn", endX + 100, endY + 50);
+      }
+      else{
+        if (diceOver) {
+          fill(255, 255, 0);
+        } else {
+          fill(255);
+        }
+        rect(diceX, diceY, buttonWidth, buttonHeight);
+        fill(0);
+        text("Roll Die", diceX + 100, diceY + 50);
       }
       fill(0, 0, 255);
       circle(playerTwoX, playerTwoY, 50);
@@ -259,7 +279,6 @@ void draw() {
           text("" +Players.get(1).getPurchasables().get(i).getName(), width/2+350, 260  + 30 * i);
         }
       }
-      text("Roll Die", diceX + 100, diceY+50);
       fill(0);
       text("Currently On: " + Locations.get(playerTwoCounter).getName().toString() + " ($" + Locations.get(playerTwoCounter).getValue() + ")", width/2+350, 110);
       if (Locations.get(playerTwoCounter) instanceof Purchasable && !Locations.get(playerTwoCounter).getOwned()) {
