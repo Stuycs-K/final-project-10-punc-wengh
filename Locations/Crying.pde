@@ -307,7 +307,7 @@ void draw() {
     }
     
   }
-  if (endGameOver && state == 2) {
+  if (state == 2) {
       background(background);
       textSize(40);
       text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
@@ -550,7 +550,7 @@ void mousePressed() {
       Players.get(1).withdraw(toOwn.getValue());
     }
   }
-  if (endGameOver) {
+  if (endGameOver && state == 1) {
     playerOneWorth = Players.get(0).getBalance();
     playerTwoWorth = Players.get(1).getBalance();
     for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
