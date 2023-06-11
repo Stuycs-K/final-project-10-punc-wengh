@@ -606,7 +606,8 @@ void mousePressed() {
       if (oneChest.equals("GET OUT OF JAIL FREE.")) {
         oneJailCard++;
       }
-    } else {
+    }
+    if (Locations.get(playerOneCounter) instanceof Chance) {
       oneChance = Chance.get((int)Math.random()*Chance.size());
       if (oneChance.equals("GET OUT OF JAIL FREE.")) {
         oneJailCard++;
@@ -621,94 +622,63 @@ void mousePressed() {
         Players.get(0).withdraw(15);
       }
     }
-          if (Locations.get(playerTwoCounter) instanceof Card) {
-        if (Locations.get(playerTwoCounter) instanceof Chest) {
-          twoChest = Chest.get((int)Math.random()*Chest.size());
-          text(twoChest, width-width/4, height/2);
-          if (twoChest.equals("FROM SALE OF STOCK. YOU GET $50.")) {
-            Players.get(0).deposit(50);
-          }
-          if (twoChest.equals("DOCTOR'S FEES. PAY $50.")) {
-            Players.get(1).withdraw(50);
-          }
-          if (twoChest.equals("LIFE INSURANCE MATURES. COLLECT $100.") ||
-            twoChest.equals("VACATION FUND MATURES. COLLECT $100.") ||
-            twoChest.equals("YOU INHERIT. COLLECT $100.")) {
-            Players.get(1).deposit(100);
-          }
-          if (twoChest.equals("HOSTPITAL FEES. PAY $100.")) {
-            Players.get(1).withdraw(100);
-          }
-          if (twoChest.equals("INCOME TAX REFUND. COLLECT $20.")) {
-            Players.get(1).deposit(20);
-          }
-          if (twoChest.equals("BANK ERROR IN YOUR FAVOR. COLLECT $200.")) {
-            Players.get(1).deposit(200);
-          }
-          if (twoChest.equals("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.")) {
-            Players.get(1).deposit(10);
-          }
-          if (twoChest.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
-            twoInJail = true;
-          }
-          if (twoChest.equals("GET OUT OF JAIL FREE.")) {
-            twoJailCard++;
-          }
-        } else {
-          twoChance = Chance.get((int)Math.random()*Chance.size());
-          text(twoChance, width-width/4, height/2);
-          if (twoChance.equals("GET OUT OF JAIL FREE.")) {
-            oneJailCard++;
-          }
-          if (twoChance.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
-            twoInJail = true;
-          }
-          if (twoChance.equals("YOUR BUILDING LOAN MATURES. COLLECT $150.")) {
-            Players.get(1).deposit(150);
-          }
-          if (twoChance.equals("SPEEDING FINE. PAY $15.")) {
-            Players.get(1).withdraw(15);
-          }
-        }
+    if (Locations.get(playerTwoCounter) instanceof Chest) {
+      twoChest = Chest.get((int)Math.random()*Chest.size());
+      text(twoChest, width-width/4, height/2);
+      if (twoChest.equals("FROM SALE OF STOCK. YOU GET $50.")) {
+        Players.get(0).deposit(50);
       }
-    if (oneInJail && turn == 0) {
+      if (twoChest.equals("DOCTOR'S FEES. PAY $50.")) {
+        Players.get(1).withdraw(50);
+      }
+      if (twoChest.equals("LIFE INSURANCE MATURES. COLLECT $100.") ||
+        twoChest.equals("VACATION FUND MATURES. COLLECT $100.") ||
+        twoChest.equals("YOU INHERIT. COLLECT $100.")) {
+        Players.get(1).deposit(100);
+      }
+      if (twoChest.equals("HOSTPITAL FEES. PAY $100.")) {
+        Players.get(1).withdraw(100);
+      }
+      if (twoChest.equals("INCOME TAX REFUND. COLLECT $20.")) {
+        Players.get(1).deposit(20);
+      }
+      if (twoChest.equals("BANK ERROR IN YOUR FAVOR. COLLECT $200.")) {
+        Players.get(1).deposit(200);
+      }
+      if (twoChest.equals("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.")) {
+        Players.get(1).deposit(10);
+      }
+      if (twoChest.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+        twoInJail = true;
+      }
+      if (twoChest.equals("GET OUT OF JAIL FREE.")) {
+        twoJailCard++;
+      }
+    }
+    if (Locations.get(playerTwoCounter) instanceof Chance) {
+      twoChance = Chance.get((int)Math.random()*Chance.size());
+      text(twoChance, width-width/4, height/2);
+      if (twoChance.equals("GET OUT OF JAIL FREE.")) {
+        oneJailCard++;
+      }
+      if (twoChance.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+        twoInJail = true;
+      }
+      if (twoChance.equals("YOUR BUILDING LOAN MATURES. COLLECT $150.")) {
+        Players.get(1).deposit(150);
+      }
+      if (twoChance.equals("SPEEDING FINE. PAY $15.")) {
+        Players.get(1).withdraw(15);
+      }
+    }
+  }
+  if (oneInJail && turn == 0) {
 
-      d1 = (int)(random(1, 7));
-      d2 = (int)(random(1, 7));
-      if (d1 == d2) {
-        oneInJail = false;
-        move = d1 + d2;
-        for (int i = 0; i < move; i++) {
-          if (playerOneCounter >= 0 && playerOneCounter < 10) {
-            playerOneX -= 86;
-            playerOneCounter += 1;
-          } else if (playerOneCounter >= 10 && playerOneCounter < 20) {
-            playerOneY -= 84;
-            playerOneCounter += 1;
-          } else if (playerOneCounter >= 20 && playerOneCounter < 30) {
-            playerOneX += 86;
-            playerOneCounter += 1;
-          } else if (playerOneCounter >= 30 && playerOneCounter < 40) {
-            playerOneY += 84;
-            playerOneCounter += 1;
-          }
-        }
-        for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
-          if (Locations.get(playerOneCounter).getName().equals(Players.get(1).getPurchasables().get(i).getName())) {
-            Players.get(0).withdraw(Players.get(1).getPurchasables().get(i).getValue());
-            Players.get(1).deposit(Players.get(1).getPurchasables().get(i).getValue());
-          }
-        }
-        oneRolled = true;
-        twoRolled = false;
-      }
-      oneRolled = true;
-      twoRolled = false;
-    } else if (turn == 0 && !oneRolled) {
-      d1 = (int)(random(1, 7));
-      d2 = (int)(random(1, 7));
+    d1 = (int)(random(1, 7));
+    d2 = (int)(random(1, 7));
+    if (d1 == d2) {
+      oneInJail = false;
       move = d1 + d2;
-
       for (int i = 0; i < move; i++) {
         if (playerOneCounter >= 0 && playerOneCounter < 10) {
           playerOneX -= 86;
@@ -723,81 +693,70 @@ void mousePressed() {
           playerOneY += 84;
           playerOneCounter += 1;
         }
-        if (playerOneCounter == 40) {
-          playerOneCounter = 0;
-          Players.get(0).deposit(200);
-        }
       }
-
       for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
         if (Locations.get(playerOneCounter).getName().equals(Players.get(1).getPurchasables().get(i).getName())) {
           Players.get(0).withdraw(Players.get(1).getPurchasables().get(i).getValue());
           Players.get(1).deposit(Players.get(1).getPurchasables().get(i).getValue());
         }
       }
-
-      if (Locations.get(playerOneCounter).getName().equals("Go To Jail")) {
-        oneInJail = true;
-        playerOneX = 90;
-        playerOneY = 950;
-        playerOneCounter = 10;
-      }
-      if (Locations.get(playerOneCounter).getName().equals("Income Tax")) {
-        Players.get(0).withdraw(200);
-      }
-      if (Locations.get(playerOneCounter).getName().equals("Luxury Tax")) {
-        Players.get(0).withdraw(100);
-      }
-
       oneRolled = true;
       twoRolled = false;
-    } else if (twoInJail && turn ==1) {
-      d3 = (int)(random(1, 7));
-      d4 = (int)(random(1, 7));
-      if (d3 == d4) {
-        twoInJail = false;
-        move = d3 + d4;
-        for (int i = 0; i < move; i++) {
-          if (playerTwoCounter > 0 && playerTwoCounter < 9) {
-            playerTwoX -= 86;
-            playerTwoCounter += 1;
-          } else if (playerTwoCounter == 9 || playerTwoCounter == 0) {
-            playerTwoX -= 150;
-            playerTwoCounter += 1;
-          } else if (playerTwoCounter == 20 || playerTwoCounter == 29) {
-            playerTwoX += 150;
-            playerTwoCounter +=1;
-          } else if (playerTwoCounter == 10 || playerTwoCounter == 19) {
-            playerTwoY -= 150;
-            playerTwoCounter += 1;
-          } else if (playerTwoCounter == 30 || playerTwoCounter == 39) {
-            playerTwoY += 150;
-            playerTwoCounter +=1;
-          } else if (playerTwoCounter > 10 && playerTwoCounter < 19) {
-            playerTwoY -= 83;
-            playerTwoCounter += 1;
-          } else if (playerTwoCounter >= 20 && playerTwoCounter < 29) {
-            playerTwoX += 86;
-            playerTwoCounter += 1;
-          } else if (playerTwoCounter >= 30 && playerTwoCounter < 39) {
-            playerTwoY += 83;
-            playerTwoCounter += 1;
-          }
-          twoRolled = true;
-          oneRolled = false;
-        }
-        for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-          if (Locations.get(playerTwoCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
-            Players.get(1).withdraw(Players.get(0).getPurchasables().get(i).getValue());
-            Players.get(0).deposit(Players.get(0).getPurchasables().get(i).getValue());
-          }
-        }
+    }
+    oneRolled = true;
+    twoRolled = false;
+  } else if (turn == 0 && !oneRolled) {
+    d1 = (int)(random(1, 7));
+    d2 = (int)(random(1, 7));
+    move = d1 + d2;
+
+    for (int i = 0; i < move; i++) {
+      if (playerOneCounter >= 0 && playerOneCounter < 10) {
+        playerOneX -= 86;
+        playerOneCounter += 1;
+      } else if (playerOneCounter >= 10 && playerOneCounter < 20) {
+        playerOneY -= 84;
+        playerOneCounter += 1;
+      } else if (playerOneCounter >= 20 && playerOneCounter < 30) {
+        playerOneX += 86;
+        playerOneCounter += 1;
+      } else if (playerOneCounter >= 30 && playerOneCounter < 40) {
+        playerOneY += 84;
+        playerOneCounter += 1;
       }
-      twoRolled = true;
-      oneRolled = false;
-    } else if (turn == 1 && !twoRolled) {
-      d3 = (int)(random(1, 7));
-      d4 = (int)(random(1, 7));
+      if (playerOneCounter == 40) {
+        playerOneCounter = 0;
+        Players.get(0).deposit(200);
+      }
+    }
+
+    for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
+      if (Locations.get(playerOneCounter).getName().equals(Players.get(1).getPurchasables().get(i).getName())) {
+        Players.get(0).withdraw(Players.get(1).getPurchasables().get(i).getValue());
+        Players.get(1).deposit(Players.get(1).getPurchasables().get(i).getValue());
+      }
+    }
+
+    if (Locations.get(playerOneCounter).getName().equals("Go To Jail")) {
+      oneInJail = true;
+      playerOneX = 90;
+      playerOneY = 950;
+      playerOneCounter = 10;
+    }
+    if (Locations.get(playerOneCounter).getName().equals("Income Tax")) {
+      Players.get(0).withdraw(200);
+    }
+    if (Locations.get(playerOneCounter).getName().equals("Luxury Tax")) {
+      Players.get(0).withdraw(100);
+    }
+
+    oneRolled = true;
+    twoRolled = false;
+  } else if (twoInJail && turn ==1) {
+    d3 = (int)(random(1, 7));
+    d4 = (int)(random(1, 7));
+    if (d3 == d4) {
+      twoInJail = false;
       move = d3 + d4;
       for (int i = 0; i < move; i++) {
         if (playerTwoCounter > 0 && playerTwoCounter < 9) {
@@ -825,10 +784,8 @@ void mousePressed() {
           playerTwoY += 83;
           playerTwoCounter += 1;
         }
-        if (playerTwoCounter == 40) {
-          playerTwoCounter = 0;
-          Players.get(1).deposit(200);
-        }
+        twoRolled = true;
+        oneRolled = false;
       }
       for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
         if (Locations.get(playerTwoCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
@@ -836,24 +793,67 @@ void mousePressed() {
           Players.get(0).deposit(Players.get(0).getPurchasables().get(i).getValue());
         }
       }
-      if (Locations.get(playerTwoCounter).getName().equals("Go To Jail")) {
-        twoInJail = true;
-        playerTwoX = 32;
-        playerTwoY = 1000;
-        playerTwoCounter = 10;
-      }
-      if (Locations.get(playerTwoCounter).getName().equals("Income Tax")) {
-        Players.get(1).withdraw(200);
-      }
-      if (Locations.get(playerTwoCounter).getName().equals("Luxury Tax")) {
-        Players.get(1).withdraw(100);
-      }
-      oneRolled = false;
-      twoRolled = true;
     }
-    if (playerOneWorth < 0 || playerTwoWorth < 0) {
-      state = 2;
+    twoRolled = true;
+    oneRolled = false;
+  } else if (turn == 1 && !twoRolled) {
+    d3 = (int)(random(1, 7));
+    d4 = (int)(random(1, 7));
+    move = d3 + d4;
+    for (int i = 0; i < move; i++) {
+      if (playerTwoCounter > 0 && playerTwoCounter < 9) {
+        playerTwoX -= 86;
+        playerTwoCounter += 1;
+      } else if (playerTwoCounter == 9 || playerTwoCounter == 0) {
+        playerTwoX -= 150;
+        playerTwoCounter += 1;
+      } else if (playerTwoCounter == 20 || playerTwoCounter == 29) {
+        playerTwoX += 150;
+        playerTwoCounter +=1;
+      } else if (playerTwoCounter == 10 || playerTwoCounter == 19) {
+        playerTwoY -= 150;
+        playerTwoCounter += 1;
+      } else if (playerTwoCounter == 30 || playerTwoCounter == 39) {
+        playerTwoY += 150;
+        playerTwoCounter +=1;
+      } else if (playerTwoCounter > 10 && playerTwoCounter < 19) {
+        playerTwoY -= 83;
+        playerTwoCounter += 1;
+      } else if (playerTwoCounter >= 20 && playerTwoCounter < 29) {
+        playerTwoX += 86;
+        playerTwoCounter += 1;
+      } else if (playerTwoCounter >= 30 && playerTwoCounter < 39) {
+        playerTwoY += 83;
+        playerTwoCounter += 1;
+      }
+      if (playerTwoCounter == 40) {
+        playerTwoCounter = 0;
+        Players.get(1).deposit(200);
+      }
     }
+    for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
+      if (Locations.get(playerTwoCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
+        Players.get(1).withdraw(Players.get(0).getPurchasables().get(i).getValue());
+        Players.get(0).deposit(Players.get(0).getPurchasables().get(i).getValue());
+      }
+    }
+    if (Locations.get(playerTwoCounter).getName().equals("Go To Jail")) {
+      twoInJail = true;
+      playerTwoX = 32;
+      playerTwoY = 1000;
+      playerTwoCounter = 10;
+    }
+    if (Locations.get(playerTwoCounter).getName().equals("Income Tax")) {
+      Players.get(1).withdraw(200);
+    }
+    if (Locations.get(playerTwoCounter).getName().equals("Luxury Tax")) {
+      Players.get(1).withdraw(100);
+    }
+    oneRolled = false;
+    twoRolled = true;
+  }
+  if (playerOneWorth < 0 || playerTwoWorth < 0) {
+    state = 2;
   } else if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
     Locations.get(playerOneCounter).setOwned();
     Location toOwn = Locations.get(playerOneCounter);
