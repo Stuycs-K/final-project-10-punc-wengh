@@ -57,6 +57,10 @@ int twoTurnsJail = 0;
 
 void setup() {
   size(1920, 1080);
+  init();
+}
+
+void init() {
   frameRate(100);
   countdown = 0;
   background = loadImage("background.jpg");
@@ -100,6 +104,13 @@ void update(int x, int y) {
   } else {
     buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   }
+}
+
+void restart() {
+  Players.remove(0);
+  Players.remove(0);
+  Players.add(new Player("Player 1's Turn"));
+  Players.add(new Player("Player 2's Turn"));
 }
 
 boolean overDice(int x, int y, int width, int height) {
@@ -176,6 +187,8 @@ boolean overJailCard(int x, int y, int width, int height) {
 void draw() {
   update(mouseX, mouseY);
   if (state == 0) {
+    Players.add(new Player("Player 1's Turn"));
+    Players.add(new Player("Player 2's Turn"));
     background(background);
     PImage welcome = loadImage("welcome.png");
     image(welcome, width/4, height/22, width/2, height/2);
@@ -193,7 +206,7 @@ void draw() {
     textAlign(CENTER);
   }
 
-  if (state == 1) {
+  else if (state == 1) {
     textSize(30);
     background(background);
     image(board, 0, 0, 1050, 1050);
@@ -389,19 +402,21 @@ void mousePressed() {
   } else if (endOver && turn == 1 && twoRolled) {
     turn = 0;
   }
-  if (startOver) {
+  else if (startOver) {
     state = 1;
+    restart();
+    redraw();
   }
-  if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
+  else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
     Players.get(0).withdraw(200);
     oneInJail = false;
   }
-  if (fineOver && turn == 1 && twoInJail && Players.get(1).getBalance() - 200 >= 0) {
+  else if (fineOver && turn == 1 && twoInJail && Players.get(1).getBalance() - 200 >= 0) {
     Players.get(1).withdraw(200);
     twoInJail = false;
   }
 
-  if (diceOver) {
+  else if (diceOver) {
     if (oneInJail && turn == 0) {
 
       d1 = (int)(random(1, 7));
@@ -588,21 +603,21 @@ void mousePressed() {
     }
   }
 
-  if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
+  else if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
       Locations.get(playerOneCounter).setOwned();
       Location toOwn = Locations.get(playerOneCounter);
       Players.get(0).addOwned(toOwn);
       Players.get(0).withdraw(toOwn.getValue());
     
   }
-  if (buyOver && turn == 1 && !Locations.get(playerTwoCounter).getOwned() && Locations.get(playerTwoCounter) instanceof Purchasable && Players.get(1).getBalance() - Locations.get(playerTwoCounter).getValue() >= 0) {
+  else if (buyOver && turn == 1 && !Locations.get(playerTwoCounter).getOwned() && Locations.get(playerTwoCounter) instanceof Purchasable && Players.get(1).getBalance() - Locations.get(playerTwoCounter).getValue() >= 0) {
       Locations.get(playerTwoCounter).setOwned();
       Location toOwn = Locations.get(playerTwoCounter);
       Players.get(1).addOwned(toOwn);
       Players.get(1).withdraw(toOwn.getValue());
     }
   
-  if (endGameOver && state == 1) {
+  else if (endGameOver && state == 1) {
     playerOneWorth = Players.get(0).getBalance();
     playerTwoWorth = Players.get(1).getBalance();
     for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
@@ -613,7 +628,7 @@ void mousePressed() {
     }
     state = 2;
   }
-  if (menuOver) {
+  else if (menuOver) {
     state = 0;
   }
 }
