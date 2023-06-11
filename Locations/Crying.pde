@@ -460,6 +460,10 @@ void mousePressed() {
   else if (startOver) {
     state = 1;
     restart();
+    playerOneX = playerOneY = 950;
+    playerTwoX = 1020;
+    playerTwoY = 1000;
+    d1 = d2 = d3 = d4 = 0;
     redraw();
   }
   else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
