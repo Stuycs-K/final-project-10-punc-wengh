@@ -16,11 +16,14 @@ int fineX = 1480;
 int fineY = 930;
 int endX = 1690;
 int endY = 930;
+int gameEndX = 1690;
+int gameEndY = 50;
 boolean diceOver = false;
 boolean buyOver = false;
 boolean endOver = false;
 boolean startOver = false;
 boolean fineOver = false;
+boolean endGameOver = false;
 int startX = 835;
 int startY = 489;
 int startWidth = 250;
@@ -62,36 +65,25 @@ void setup() {
 void update(int x, int y) {
   if (overDice(diceX, diceY, buttonWidth, buttonHeight)) {
     diceOver = true;
-    buyOver = false;
-    endOver = false;
-    startOver = false;
-    fineOver = false;
+    buyOver = endGameOver = endOver = startOver = endGameOver = false;
   } else if (overBuy(buyX, buyY, buttonWidth, buttonHeight)) {
     buyOver = true;
-    diceOver = false;
-    endOver = false;
-    startOver = false;
-    fineOver = false;
+    endGameOver = diceOver = endOver = startOver = endGameOver = false;
   } else if (overEnd(endX, endY, buttonWidth, buttonHeight)) {
     endOver = true;
-    buyOver = false;
-    diceOver = false;
-    startOver = false;
-    fineOver = false;
+    buyOver = diceOver = endGameOver = startOver = endGameOver = false;
   } else if (overFine(fineX, fineY, buttonWidth, buttonHeight)) {
     fineOver = true;
-    endOver = false;
-    buyOver = false;
-    diceOver = false;
-    startOver = false;
+    buyOver = diceOver = endOver = startOver = endGameOver = false;
   } else if (overStart(startX, startY, startWidth, startHeight)) {
     startOver = true;
-    endOver = false;
-    buyOver = false;
-    diceOver = false;
-    fineOver = false;
-  } else {
+    buyOver = diceOver = endOver = endGameOver = fineOver = false;
+  } else if(overEndGame(gameEndX, gameEndY, buttonWidth, buttonHeight)){
+    endGameOver = true;
     buyOver = diceOver = endOver = startOver = fineOver = false;
+  }
+  else {
+    buyOver = diceOver = endOver = startOver = fineOver = endGameOver = false;
   }
 }
 
@@ -139,6 +131,15 @@ boolean overStart(int x, int y, int width, int height) {
   }
 }
 
+boolean overEndGame(int x, int y, int width, int height) {
+  if (mouseX >= x && mouseX <= x+width &&
+    mouseY >= y && mouseY <= y+height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 void draw() {
   background(background);
   PImage welcome = loadImage("welcome.png");
@@ -159,18 +160,19 @@ void draw() {
 
 
   if (state == 1) {
+    textSize(30);
     background(background);
     image(board, 0, 0, 1050, 1050);
-    if (diceOver) {
-      fill(255, 255, 0);
+    if (endGameOver) {
+      fill(255, 0, 0);
     } else {
       fill(255);
     }
-    
+    rect(gameEndX, gameEndY, buttonWidth, buttonHeight);
     fill(0);
-    text("End Game", 0, 0);
+    text("End Game", gameEndX + 100, gameEndY + 50);
 
-    textSize(30);
+    
     fill(255, 0, 0);
     circle(playerOneX, playerOneY, 50);
 
