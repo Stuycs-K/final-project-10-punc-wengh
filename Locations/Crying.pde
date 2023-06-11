@@ -365,7 +365,7 @@ void mousePressed() {
       oneTurnsJail = 0;
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
-      move = d1 + d2;
+      move = d1+d2;
 
       for (int i = 0; i < move; i++) {
         if (playerOneCounter >= 0 && playerOneCounter < 10) {
@@ -400,7 +400,12 @@ void mousePressed() {
         playerOneY = 950;
         playerOneCounter = 10;
       }
-
+      if (Locations.get(playerOneCounter).getName().equals("Income Tax")) {
+        Players.get(0).withdraw(200);
+      }
+      if (Locations.get(playerOneCounter).getName().equals("Luxury Tax")){
+        Players.get(0).withdraw(100);
+      }
 
       oneRolled = true;
       twoRolled = false;
@@ -498,6 +503,12 @@ void mousePressed() {
         playerTwoY = 1000;
         playerTwoCounter = 10;
       }
+      if (Locations.get(playerTwoCounter).getName().equals("Income Tax")) {
+        Players.get(1).withdraw(200);
+      }
+      if (Locations.get(playerTwoCounter).getName().equals("Luxury Tax")){
+        Players.get(1).withdraw(100);
+      }
       oneRolled = false;
       twoRolled = true;
     }
@@ -537,7 +548,7 @@ void addLocations() {
   Locations.add(new Property("Mediterranean Avenue", "brown", 0, 60, 2, false));
   Locations.add(new Chest("Community Chest", Chest.get((int)Math.random() * Chest.size()), false));
   Locations.add(new Property("Baltic Avenue", "brown", 0, 60, 4, false));
-  Locations.add(new Tax("Income Tax"));
+  Locations.add(new Tax("Income Tax", 200));
   Locations.add(new Railroad("Reading Railroad", 200, 25, 0, false));
   Locations.add(new Property("Oriental Avenue", "light blue", 0, 100, 6, false));
   Locations.add(new Chance("Chance", Chance.get((int)Math.random() * Chance.size()), false));
@@ -571,6 +582,6 @@ void addLocations() {
   Locations.add(new Railroad("Short Line", 200, 25, 0, false));
   Locations.add(new Chance("Community Chest", Chance.get((int)Math.random() * Chance.size()), false));
   Locations.add(new Property("Park Place", "blue", 0, 350, 35, false));
-  Locations.add(new Tax("Luxury Tax"));
+  Locations.add(new Tax("Luxury Tax", 100));
   Locations.add(new Property("Boardwalk", "blue", 0, 400, 50, false));
 }
