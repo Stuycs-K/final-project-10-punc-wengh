@@ -94,9 +94,6 @@ void update(int x, int y) {
   } else if (overJailCard(jailCardX, jailCardY, buttonWidth, buttonHeight)) {
     jailCardOver = true;
     buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver =false;
-  } else if (overMenu(menuX, menuY, buttonWidth, buttonHeight)) {
-    menuOver = true;
-    buyOver = diceOver = endOver = startOver = fineOver = endGameOver = jailCardOver =false;
   } else {
     buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   }
@@ -174,24 +171,23 @@ boolean overJailCard(int x, int y, int width, int height) {
 }
 
 void draw() {
-  update(mouseX, mouseY);
-  if (state == 0) {
-    background(background);
-    PImage welcome = loadImage("welcome.png");
-    image(welcome, width/4, height/22, width/2, height/2);
-  
+  background(background);
+  PImage welcome = loadImage("welcome.png");
+  image(welcome, width/4, height/22, width/2, height/2);
+
+  fill(255);
+  if (startOver) {
+    fill(255, 255, 0);
+  } else {
     fill(255);
-    if (startOver) {
-      fill(255, 255, 0);
-    } else {
-      fill(255);
-    }
-    rect(startX, startY, startWidth, startHeight);
-    fill(0);
-    textSize(40);
-    text("Start", width/2, height/2+10);
-    textAlign(CENTER);
   }
+  rect(startX, startY, startWidth, startHeight);
+  fill(0);
+  textSize(40);
+  text("Start", width/2, height/2+10);
+  textAlign(CENTER);
+  update(mouseX, mouseY);
+
 
   if (state == 1) {
     textSize(30);
@@ -392,11 +388,11 @@ void mousePressed() {
   if (startOver) {
     state = 1;
   }
-  if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
+  if (fineOver && turn == 0 && oneInJail) {
     Players.get(0).withdraw(200);
     oneInJail = false;
   }
-  if (fineOver && turn == 1 && twoInJail && Players.get(1).getBalance() - 200 >= 0) {
+  if (fineOver && turn == 1 && twoInJail) {
     Players.get(1).withdraw(200);
     twoInJail = false;
   }
@@ -520,7 +516,7 @@ void mousePressed() {
           oneRolled = false;
         }
         for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-          if (Locations.get(playerTwoCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
+          if (Locations.get(playerOneCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
             Players.get(1).withdraw(Players.get(0).getPurchasables().get(i).getValue());
             Players.get(0).deposit(Players.get(0).getPurchasables().get(i).getValue());
           }
@@ -566,7 +562,7 @@ void mousePressed() {
         }
       }
       for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-        if (Locations.get(playerTwoCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
+        if (Locations.get(playerOneCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
           Players.get(1).withdraw(Players.get(0).getPurchasables().get(i).getValue());
           Players.get(0).deposit(Players.get(0).getPurchasables().get(i).getValue());
         }
@@ -588,20 +584,22 @@ void mousePressed() {
     }
   }
 
-  if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
+  if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned()) {
+    if (Locations.get(playerOneCounter) instanceof Purchasable) {
       Locations.get(playerOneCounter).setOwned();
       Location toOwn = Locations.get(playerOneCounter);
       Players.get(0).addOwned(toOwn);
       Players.get(0).withdraw(toOwn.getValue());
-    
+    }
   }
-  if (buyOver && turn == 1 && !Locations.get(playerTwoCounter).getOwned() && Locations.get(playerTwoCounter) instanceof Purchasable && Players.get(1).getBalance() - Locations.get(playerTwoCounter).getValue() >= 0) {
+  if (buyOver && turn != 0 && !Locations.get(playerTwoCounter).getOwned()) {
+    if (Locations.get(playerTwoCounter) instanceof Purchasable) {
       Locations.get(playerTwoCounter).setOwned();
       Location toOwn = Locations.get(playerTwoCounter);
       Players.get(1).addOwned(toOwn);
       Players.get(1).withdraw(toOwn.getValue());
     }
-  
+  }
   if (endGameOver && state == 1) {
     playerOneWorth = Players.get(0).getBalance();
     playerTwoWorth = Players.get(1).getBalance();
@@ -612,9 +610,6 @@ void mousePressed() {
       playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
     }
     state = 2;
-  }
-  if (menuOver) {
-    state = 0;
   }
 }
 void addChestCards() {
