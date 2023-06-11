@@ -94,6 +94,9 @@ void update(int x, int y) {
   } else if (overJailCard(jailCardX, jailCardY, buttonWidth, buttonHeight)) {
     jailCardOver = true;
     buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver =false;
+  } else if (overMenu(menuX, menuY, buttonWidth, buttonHeight)) {
+    menuOver = true;
+    buyOver = diceOver = endOver = startOver = fineOver = endGameOver = jailCardOver =false;
   } else {
     buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   }
@@ -610,6 +613,9 @@ void mousePressed() {
       playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
     }
     state = 2;
+  }
+  if (menuOver) {
+    state = 0;
   }
 }
 void addChestCards() {
