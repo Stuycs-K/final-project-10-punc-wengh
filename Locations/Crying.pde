@@ -18,6 +18,10 @@ int endX = 1690;
 int endY = 930;
 int gameEndX = 1690;
 int gameEndY = 50;
+int menuX = 850;
+int menuY = 750;
+int jailCardX = 1270;
+int jailCardY = 930;
 int playerOneWorth, playerTwoWorth;
 boolean diceOver = false;
 boolean buyOver = false;
@@ -25,6 +29,8 @@ boolean endOver = false;
 boolean startOver = false;
 boolean fineOver = false;
 boolean endGameOver = false;
+boolean menuOver = false;
+boolean jailCardOver = false;
 int startX = 835;
 int startY = 489;
 int startWidth = 250;
@@ -66,25 +72,30 @@ void setup() {
 void update(int x, int y) {
   if (overDice(diceX, diceY, buttonWidth, buttonHeight)) {
     diceOver = true;
-    buyOver = endGameOver = endOver = startOver = endGameOver = false;
+    buyOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   } else if (overBuy(buyX, buyY, buttonWidth, buttonHeight)) {
     buyOver = true;
-    endGameOver = diceOver = endOver = startOver = endGameOver = false;
+    diceOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   } else if (overEnd(endX, endY, buttonWidth, buttonHeight)) {
     endOver = true;
-    buyOver = diceOver = endGameOver = startOver = endGameOver = false;
+    buyOver = diceOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   } else if (overFine(fineX, fineY, buttonWidth, buttonHeight)) {
     fineOver = true;
-    buyOver = diceOver = endOver = startOver = endGameOver = false;
+    buyOver = diceOver = endOver = startOver = endGameOver = menuOver = jailCardOver = false;
   } else if (overStart(startX, startY, startWidth, startHeight)) {
     startOver = true;
-    buyOver = diceOver = endOver = endGameOver = fineOver = false;
-  } else if(overEndGame(gameEndX, gameEndY, buttonWidth, buttonHeight)){
+    buyOver = diceOver = endOver = fineOver = endGameOver = menuOver = jailCardOver = false;
+  } else if (overEndGame(gameEndX, gameEndY, buttonWidth, buttonHeight)) {
     endGameOver = true;
-    buyOver = diceOver = endOver = startOver = fineOver = false;
-  }
-  else {
-    buyOver = diceOver = endOver = startOver = fineOver = endGameOver = false;
+    buyOver = diceOver = endOver = startOver = fineOver = menuOver = jailCardOver = false;
+  } else if (overMenu(menuX, menuY, buttonWidth, buttonHeight)) {
+    menuOver = true;
+    buyOver = diceOver = endOver = startOver = fineOver = endGameOver = jailCardOver = false;
+  } else if (overJailCard(jailCardX, jailCardY, buttonWidth, buttonHeight)) {
+    jailCardOver = true;
+    buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver =false;
+  } else {
+    buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   }
 }
 
@@ -141,6 +152,24 @@ boolean overEndGame(int x, int y, int width, int height) {
   }
 }
 
+boolean overMenu(int x, int y, int width, int height) {
+  if (mouseX >= x && mouseX <= x+width &&
+    mouseY >= y && mouseY <= y+height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+boolean overJailCard(int x, int y, int width, int height) {
+  if (mouseX >= x && mouseX <= x+width &&
+    mouseY >= y && mouseY <= y+height) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 void draw() {
   background(background);
   PImage welcome = loadImage("welcome.png");
@@ -173,7 +202,7 @@ void draw() {
     fill(0);
     text("End Game", gameEndX + 100, gameEndY + 50);
 
-    
+
     fill(255, 0, 0);
     circle(playerOneX, playerOneY, 50);
 
@@ -188,8 +217,7 @@ void draw() {
         rect(endX, endY, buttonWidth, buttonHeight);
         fill(0);
         text("End Turn", endX + 100, endY + 50);
-      }
-      else{
+      } else {
         if (diceOver) {
           fill(255, 255, 0);
         } else {
@@ -230,7 +258,8 @@ void draw() {
         fill(0);
         text("Buy", buyX + 100, buyY + 50);
       }
-      if (oneTurnsJail < 2 && oneInJail) {
+      if (oneInJail) {
+
         if (fineOver) {
           fill(255, 255, 0);
         } else {
@@ -239,8 +268,18 @@ void draw() {
         rect(fineX, fineY, buttonWidth, buttonHeight);
         fill(0);
         text("Pay Fine", fineX + 100, fineY + 50);
+
+        if (jailCardOver || buyOver) {
+          fill(0, 0, 255);
+        } else {
+          fill(255);
+        }
+        rect(jailCardX, jailCardY, buttonWidth, buttonHeight);
+        fill(0);
+        text("Use Card", jailCardX + 100, jailCardY + 50);
       }
     }
+
 
     //player 2
     fill(0, 0, 255);
@@ -255,8 +294,7 @@ void draw() {
         rect(endX, endY, buttonWidth, buttonHeight);
         fill(0);
         text("End Turn", endX + 100, endY + 50);
-      }
-      else{
+      } else {
         if (diceOver) {
           fill(255, 255, 0);
         } else {
@@ -294,7 +332,7 @@ void draw() {
         fill(0);
         text("Buy", buyX + 100, buyY + 50);
       }
-      if (twoTurnsJail < 2 && twoInJail) {
+      if (twoInJail) {
         if (fineOver) {
           fill(255, 255, 0);
         } else {
@@ -303,28 +341,42 @@ void draw() {
         rect(fineX, fineY, buttonWidth, buttonHeight);
         fill(0);
         text("Pay Fine", fineX + 100, fineY + 50);
+        if (jailCardOver || buyOver) {
+          fill(0, 0, 255);
+        } else {
+          fill(255);
+        }
+        rect(jailCardX, jailCardY, buttonWidth, buttonHeight);
+        fill(0);
+        text("Use Card", jailCardX + 100, jailCardY + 50);
       }
     }
-    
   }
   if (state == 2) {
-      background(background);
-      textSize(40);
-      text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
-      text("Player 2 Net Worth: " + playerTwoWorth, width/2, height/3+50);
-      textSize(30);
-      text("The winner is...", width/2, height/2);
-      textSize(80);
-      if (playerOneWorth > playerTwoWorth) {
-        text("PLAYER 1!!!", width/2, height/2+100);
-      }
-      else if (playerOneWorth == playerTwoWorth) {
-        text("PLAYER 1 AND PLAYER 2 (IT IS A TIE) !!!", width/2, height/2+100);
-      }
-      else {
-        text("PLAYER 2!!!", width/2, height/2+100);
-      }
+    background(background);
+    textSize(40);
+    text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
+    text("Player 2 Net Worth: " + playerTwoWorth, width/2, height/3+50);
+    textSize(30);
+    text("The winner is...", width/2, height/2);
+    textSize(80);
+    if (playerOneWorth > playerTwoWorth) {
+      text("PLAYER 1!!!", width/2, height/2+100);
+    } else if (playerOneWorth == playerTwoWorth) {
+      text("PLAYER 1 AND PLAYER 2 (IT IS A TIE) !!!", width/2, height/2+100);
+    } else {
+      text("PLAYER 2!!!", width/2, height/2+100);
     }
+    textSize(30);
+    if (menuOver) {
+      fill(0, 0, 255);
+    } else {
+      fill(255);
+    }
+    rect(menuX, menuY, buttonWidth, buttonHeight);
+    fill(0);
+    text("Menu", menuX + 100, menuY + 50);
+  }
 }
 
 void mousePressed() {
@@ -380,12 +432,11 @@ void mousePressed() {
       oneTurnsJail += 1;
       oneRolled = true;
       twoRolled = false;
-    } 
-    else if (turn == 0 && !oneRolled) {
+    } else if (turn == 0 && !oneRolled) {
       oneTurnsJail = 0;
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
-      move = d1+d2;
+      move = d1 + d2;
 
       for (int i = 0; i < move; i++) {
         if (playerOneCounter >= 0 && playerOneCounter < 10) {
@@ -423,14 +474,13 @@ void mousePressed() {
       if (Locations.get(playerOneCounter).getName().equals("Income Tax")) {
         Players.get(0).withdraw(200);
       }
-      if (Locations.get(playerOneCounter).getName().equals("Luxury Tax")){
+      if (Locations.get(playerOneCounter).getName().equals("Luxury Tax")) {
         Players.get(0).withdraw(100);
       }
 
       oneRolled = true;
       twoRolled = false;
-    } 
-    else if (twoInJail && turn ==1) {
+    } else if (twoInJail && turn ==1) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
       if (d3 == d4) {
@@ -526,7 +576,7 @@ void mousePressed() {
       if (Locations.get(playerTwoCounter).getName().equals("Income Tax")) {
         Players.get(1).withdraw(200);
       }
-      if (Locations.get(playerTwoCounter).getName().equals("Luxury Tax")){
+      if (Locations.get(playerTwoCounter).getName().equals("Luxury Tax")) {
         Players.get(1).withdraw(100);
       }
       oneRolled = false;
