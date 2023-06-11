@@ -7,6 +7,7 @@ ArrayList <Location> Locations = new ArrayList<Location>();
 ArrayList <String> Chest = new ArrayList<String>();
 ArrayList <String> Chance = new ArrayList<String>();
 ArrayList <Player> Players = new ArrayList<Player>();
+String oneChest, oneChance, twoChest, twoChance;
 int buttonWidth = 200;
 int buttonHeight = 80 ;
 int diceX = 1060;
@@ -257,25 +258,62 @@ void draw() {
 
     fill(255, 0, 0);
     circle(playerOneX, playerOneY, 50);
-    
-    if (Locations.get(playerOneCounter) instanceof Card) {
 
-      if (Locations.get(playerOneCounter) instanceof Chest) {
-        text(Chest.get((int)Math.random()*Chest.size()), width-width/4, height/2);
-      } else {
-        text(Chance.get((int)Math.random()*Chance.size()), width-width/4, height/2);
-      }
-    }
-    if (Locations.get(playerTwoCounter) instanceof Card) {
-      if (Locations.get(playerTwoCounter) instanceof Chest) {
-        text(Chest.get((int)Math.random()*Chest.size()), width-width/4, height/2);
-      } else {
-        text(Chance.get((int)Math.random()*Chance.size()), width-width/4, height/2);
-      }
-    }
+
+
 
     //player 1
     if (turn == 0) {
+      if (Locations.get(playerOneCounter) instanceof Card) {
+        if (Locations.get(playerOneCounter) instanceof Chest) {
+          oneChest = Chest.get((int)Math.random()*Chest.size());
+          text(oneChest, width-width/4, height/2);
+          //if (oneChest.equals("FROM SALE OF STOCK. YOU GET $50.")) {
+          //  Players.get(0).deposit(50);
+          //}
+          //if (oneChest.equals("DOCTOR'S FEES. PAY $50.")) {
+          //  Players.get(0).withdraw(50);
+          //}
+          //if (oneChest.equals("LIFE INSURANCE MATURES. COLLECT $100.") ||
+          //  oneChest.equals("VACATION FUND MATURES. COLLECT $100.") ||
+          //  oneChest.equals("YOU INHERIT. COLLECT $100.")) {
+          //  Players.get(0).deposit(100);
+          //}
+          //if (oneChest.equals("HOSTPITAL FEES. PAY $100.")) {
+          //  Players.get(0).withdraw(100);
+          //}
+          //if (oneChest.equals("INCOME TAX REFUND. COLLECT $20.")) {
+          //  Players.get(0).deposit(20);
+          //}
+          //if (oneChest.equals("BANK ERROR IN YOUR FAVOR. COLLECT $200.")) {
+          //  Players.get(0).deposit(200);
+          //}
+          //if (oneChest.equals("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.")) {
+          //  Players.get(0).deposit(10);
+          //}
+          //if (oneChest.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+          //  oneInJail = true;
+          //}
+          //if (oneChest.equals("GET OUT OF JAIL FREE.")) {
+          //  oneJailCard++;
+          //}
+        } else {
+          oneChance = Chance.get((int)Math.random()*Chance.size());
+          text(oneChance, width-width/4, height/2);
+          //if (oneChance.equals("GET OUT OF JAIL FREE.")) {
+          //  oneJailCard++;
+          //}
+          //if (oneChance.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+          //  oneInJail = true;
+          //}
+          //if (oneChance.equals("YOUR BUILDING LOAN MATURES. COLLECT $150.")) {
+          //  Players.get(0).deposit(150);
+          //}
+          //if (oneChance.equals("SPEEDING FINE. PAY $15.")) {
+          //  Players.get(0).withdraw(15);
+          //}
+        }
+      }
       if (oneRolled) {
         if (endOver) {
           fill(255, 0, 0);
@@ -353,6 +391,56 @@ void draw() {
     fill(0, 0, 255);
     circle(playerTwoX, playerTwoY, 50);
     if (turn == 1) {
+      if (Locations.get(playerTwoCounter) instanceof Card) {
+        if (Locations.get(playerTwoCounter) instanceof Chest) {
+          twoChest = Chest.get((int)Math.random()*Chest.size());
+          text(twoChest, width-width/4, height/2);
+          //if (twoChest.equals("FROM SALE OF STOCK. YOU GET $50.")) {
+          //  Players.get(0).deposit(50);
+          //}
+          //if (twoChest.equals("DOCTOR'S FEES. PAY $50.")) {
+          //  Players.get(1).withdraw(50);
+          //}
+          //if (twoChest.equals("LIFE INSURANCE MATURES. COLLECT $100.") ||
+          //  twoChest.equals("VACATION FUND MATURES. COLLECT $100.") ||
+          //  twoChest.equals("YOU INHERIT. COLLECT $100.")) {
+          //  Players.get(1).deposit(100);
+          //}
+          //if (twoChest.equals("HOSTPITAL FEES. PAY $100.")) {
+          //  Players.get(1).withdraw(100);
+          //}
+          //if (twoChest.equals("INCOME TAX REFUND. COLLECT $20.")) {
+          //  Players.get(1).deposit(20);
+          //}
+          //if (twoChest.equals("BANK ERROR IN YOUR FAVOR. COLLECT $200.")) {
+          //  Players.get(1).deposit(200);
+          //}
+          //if (twoChest.equals("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.")) {
+          //  Players.get(1).deposit(10);
+          //}
+          //if (twoChest.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+          //  twoInJail = true;
+          //}
+          //if (twoChest.equals("GET OUT OF JAIL FREE.")) {
+          //  twoJailCard++;
+          //}
+        } else {
+          twoChance = Chance.get((int)Math.random()*Chance.size());
+          text(twoChance, width-width/4, height/2);
+          //if (twoChance.equals("GET OUT OF JAIL FREE.")) {
+          //  oneJailCard++;
+          //}
+          //if (twoChance.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+          //  twoInJail = true;
+          //}
+          //if (twoChance.equals("YOUR BUILDING LOAN MATURES. COLLECT $150.")) {
+          //  Players.get(1).deposit(150);
+          //}
+          //if (twoChance.equals("SPEEDING FINE. PAY $15.")) {
+          //  Players.get(1).withdraw(15);
+          //}
+        }
+      }
       if (!oneRolled) {
         if (endOver) {
           fill(255, 0, 0);
@@ -487,6 +575,102 @@ void mousePressed() {
     Players.get(1).withdraw(200);
     twoInJail = false;
   } else if (diceOver) {
+    if (Locations.get(playerOneCounter) instanceof Chest) {
+      oneChest = Chest.get((int)Math.random()*Chest.size());
+      if (oneChest.equals("FROM SALE OF STOCK. YOU GET $50.")) {
+        Players.get(0).deposit(50);
+      }
+      if (oneChest.equals("DOCTOR'S FEES. PAY $50.")) {
+        Players.get(0).withdraw(50);
+      }
+      if (oneChest.equals("LIFE INSURANCE MATURES. COLLECT $100.") ||
+        oneChest.equals("VACATION FUND MATURES. COLLECT $100.") ||
+        oneChest.equals("YOU INHERIT. COLLECT $100.")) {
+        Players.get(0).deposit(100);
+      }
+      if (oneChest.equals("HOSTPITAL FEES. PAY $100.")) {
+        Players.get(0).withdraw(100);
+      }
+      if (oneChest.equals("INCOME TAX REFUND. COLLECT $20.")) {
+        Players.get(0).deposit(20);
+      }
+      if (oneChest.equals("BANK ERROR IN YOUR FAVOR. COLLECT $200.")) {
+        Players.get(0).deposit(200);
+      }
+      if (oneChest.equals("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.")) {
+        Players.get(0).deposit(10);
+      }
+      if (oneChest.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+        oneInJail = true;
+      }
+      if (oneChest.equals("GET OUT OF JAIL FREE.")) {
+        oneJailCard++;
+      }
+    } else {
+      oneChance = Chance.get((int)Math.random()*Chance.size());
+      if (oneChance.equals("GET OUT OF JAIL FREE.")) {
+        oneJailCard++;
+      }
+      if (oneChance.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+        oneInJail = true;
+      }
+      if (oneChance.equals("YOUR BUILDING LOAN MATURES. COLLECT $150.")) {
+        Players.get(0).deposit(150);
+      }
+      if (oneChance.equals("SPEEDING FINE. PAY $15.")) {
+        Players.get(0).withdraw(15);
+      }
+    }
+          if (Locations.get(playerTwoCounter) instanceof Card) {
+        if (Locations.get(playerTwoCounter) instanceof Chest) {
+          twoChest = Chest.get((int)Math.random()*Chest.size());
+          text(twoChest, width-width/4, height/2);
+          if (twoChest.equals("FROM SALE OF STOCK. YOU GET $50.")) {
+            Players.get(0).deposit(50);
+          }
+          if (twoChest.equals("DOCTOR'S FEES. PAY $50.")) {
+            Players.get(1).withdraw(50);
+          }
+          if (twoChest.equals("LIFE INSURANCE MATURES. COLLECT $100.") ||
+            twoChest.equals("VACATION FUND MATURES. COLLECT $100.") ||
+            twoChest.equals("YOU INHERIT. COLLECT $100.")) {
+            Players.get(1).deposit(100);
+          }
+          if (twoChest.equals("HOSTPITAL FEES. PAY $100.")) {
+            Players.get(1).withdraw(100);
+          }
+          if (twoChest.equals("INCOME TAX REFUND. COLLECT $20.")) {
+            Players.get(1).deposit(20);
+          }
+          if (twoChest.equals("BANK ERROR IN YOUR FAVOR. COLLECT $200.")) {
+            Players.get(1).deposit(200);
+          }
+          if (twoChest.equals("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.")) {
+            Players.get(1).deposit(10);
+          }
+          if (twoChest.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+            twoInJail = true;
+          }
+          if (twoChest.equals("GET OUT OF JAIL FREE.")) {
+            twoJailCard++;
+          }
+        } else {
+          twoChance = Chance.get((int)Math.random()*Chance.size());
+          text(twoChance, width-width/4, height/2);
+          if (twoChance.equals("GET OUT OF JAIL FREE.")) {
+            oneJailCard++;
+          }
+          if (twoChance.equals("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.")) {
+            twoInJail = true;
+          }
+          if (twoChance.equals("YOUR BUILDING LOAN MATURES. COLLECT $150.")) {
+            Players.get(1).deposit(150);
+          }
+          if (twoChance.equals("SPEEDING FINE. PAY $15.")) {
+            Players.get(1).withdraw(15);
+          }
+        }
+      }
     if (oneInJail && turn == 0) {
 
       d1 = (int)(random(1, 7));
@@ -714,7 +898,6 @@ void addChestCards() {
   Chest.add("DOCTOR'S FEES. PAY $50.");
   Chest.add("LIFE INSURANCE MATURES. COLLECT $100.");
   Chest.add("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.");
-  Chest.add("ADVANCE TO GO.");
 }
 
 void addChanceCards() {
@@ -723,8 +906,6 @@ void addChanceCards() {
   Chance.add("THE BANK PAYS YOU DIVIDEND. COLLECT $50.");
   Chance.add("GET OUT OF JAIL FREE.");
   Chance.add("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.");
-  Chance.add("ADVANCE TO GO.");
-  //Chance.add("YOU HAVE BEEN ELECTED CHAIRMAN OF THE BOARD. PAY EACH PLAYER $50.");
 }
 
 void addLocations() {
