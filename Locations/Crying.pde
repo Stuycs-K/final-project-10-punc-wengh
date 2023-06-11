@@ -56,8 +56,8 @@ boolean oneRolled = false;
 boolean twoRolled = false;
 boolean oneInJail = false;
 boolean twoInJail = false;
-int oneTurnsJail = 0;
-int twoTurnsJail = 0;
+int oneJailCard = 0;
+int twoJailCard = 0;
 SoundFile file;
 SoundFile file2;
 SoundFile file3;
@@ -79,8 +79,6 @@ void init() {
   addLocations();
   Players.add(new Player("Player 1's Turn"));
   Players.add(new Player("Player 2's Turn"));
-  
-
 }
 
 void update(int x, int y) {
@@ -198,22 +196,21 @@ void draw() {
   update(mouseX, mouseY);
   if (state == 0) {
 
-    if (!played){
-    file = new SoundFile(this, "elevator music.wav");
-    file.amp(0.25);
-    file.play();
-    file.loop();
-    played = true;
-    
-  }
-  if (played2){
-    file2.stop();
-    played2 = false;
-  }
-  if (played3){
-    file3.stop();
-    played3 = false;
-  }
+    if (!played) {
+      file = new SoundFile(this, "elevator music.wav");
+      file.amp(0.25);
+      file.play();
+      file.loop();
+      played = true;
+    }
+    if (played2) {
+      file2.stop();
+      played2 = false;
+    }
+    if (played3) {
+      file3.stop();
+      played3 = false;
+    }
     Players.add(new Player("Player 1's Turn"));
     Players.add(new Player("Player 2's Turn"));
 
@@ -221,7 +218,7 @@ void draw() {
 
     PImage welcome = loadImage("welcome.png");
     image(welcome, width/4, height/22, width/2, height/2);
-  
+
     fill(255);
     if (startOver) {
       fill(255, 255, 0);
@@ -233,21 +230,18 @@ void draw() {
     textSize(40);
     text("Start", width/2, height/2+10);
     textAlign(CENTER);
-  }
-
-
-  else if (state == 1) {
+  } else if (state == 1) {
     file.stop();
-    if (!played2){
-      
-    file2 = new SoundFile(this, "swing.wav");
-    file2.amp(0.25);
-    file2.play();
-    file2.loop();
-    played2 = true;
-    played = false;
+    if (!played2) {
+
+      file2 = new SoundFile(this, "swing.wav");
+      file2.amp(0.25);
+      file2.play();
+      file2.loop();
+      played2 = true;
+      played = false;
     }
-    
+
     textSize(30);
     background(background);
     image(board, 0, 0, 1050, 1050);
@@ -263,6 +257,22 @@ void draw() {
 
     fill(255, 0, 0);
     circle(playerOneX, playerOneY, 50);
+    
+    if (Locations.get(playerOneCounter) instanceof Card) {
+
+      if (Locations.get(playerOneCounter) instanceof Chest) {
+        text(Chest.get((int)Math.random()*Chest.size()), width-width/4, height/2);
+      } else {
+        text(Chance.get((int)Math.random()*Chance.size()), width-width/4, height/2);
+      }
+    }
+    if (Locations.get(playerTwoCounter) instanceof Card) {
+      if (Locations.get(playerTwoCounter) instanceof Chest) {
+        text(Chest.get((int)Math.random()*Chest.size()), width-width/4, height/2);
+      } else {
+        text(Chance.get((int)Math.random()*Chance.size()), width-width/4, height/2);
+      }
+    }
 
     //player 1
     if (turn == 0) {
@@ -293,7 +303,7 @@ void draw() {
 
       text("Die: " + d1 + " " + d2 + " = " + (d1+d2), width/2+350, 140);
       text("In Jail: " + oneInJail, width/2+350, 170);
-      text("Turns In Jail: " + oneTurnsJail, width/2+350, 200);
+      text("Out of Jail Card(s): " + oneJailCard, width/2+350, 200);
 
       if (Players.get(0).getPurchasables().size() == 0) {
         text("Property: None", width/2+350, 230);
@@ -369,7 +379,7 @@ void draw() {
       text("Balance: " +Players.get(1).getBalance(), width/2+350, 80);
       text("Die: " + d3 + " " + d4  + " = " + (d3+d4), width/2+350, 140);
       text("In Jail: " + twoInJail, width/2+350, 170);
-      text("Turns In Jail: " + twoTurnsJail, width/2+350, 200);
+      text("Out of Jail Card(s): " + twoJailCard, width/2+350, 200);
       if (Players.get(1).getPurchasables().size() == 0) {
         text("Property: None", width/2+350, 230);
       } else {
@@ -410,8 +420,9 @@ void draw() {
       }
     }
   }
-  
+
   if (state == 2) {
+
 
     if (!played3){
     file3 = new SoundFile(this, "end.wav");
@@ -420,11 +431,11 @@ void draw() {
     played3 = true;
 
     }
-    if (played2){
+    if (played2) {
       file2.stop();
       played2 = false;
     }
-    if (played){
+    if (played) {
       file.stop();
       played = false;
     }
@@ -458,11 +469,9 @@ void draw() {
 void mousePressed() {
   if (endOver && turn == 0 && oneRolled) {
     turn = 1;
-  } 
-  else if (endOver && turn == 1 && twoRolled) {
+  } else if (endOver && turn == 1 && twoRolled) {
     turn = 0;
-  }
-  else if (startOver) {
+  } else if (startOver) {
     state = 1;
     restart();
     playerOneCounter = playerTwoCounter = 0;
@@ -471,17 +480,13 @@ void mousePressed() {
     playerTwoY = 1000;
     d1 = d2 = d3 = d4 = 0;
     redraw();
-  }
-  else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
+  } else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
     Players.get(0).withdraw(200);
     oneInJail = false;
-  }
-  else if (fineOver && turn == 1 && twoInJail && Players.get(1).getBalance() - 200 >= 0) {
+  } else if (fineOver && turn == 1 && twoInJail && Players.get(1).getBalance() - 200 >= 0) {
     Players.get(1).withdraw(200);
     twoInJail = false;
-  }
-
-  else if (diceOver) {
+  } else if (diceOver) {
     if (oneInJail && turn == 0) {
 
       d1 = (int)(random(1, 7));
@@ -513,11 +518,9 @@ void mousePressed() {
         oneRolled = true;
         twoRolled = false;
       }
-      oneTurnsJail += 1;
       oneRolled = true;
       twoRolled = false;
     } else if (turn == 0 && !oneRolled) {
-      oneTurnsJail = 0;
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
       move = d1 + d2;
@@ -608,9 +611,7 @@ void mousePressed() {
       }
       twoRolled = true;
       oneRolled = false;
-      twoTurnsJail +=1;
     } else if (turn == 1 && !twoRolled) {
-      twoTurnsJail = 0;
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
       move = d3 + d4;
@@ -666,47 +667,64 @@ void mousePressed() {
       oneRolled = false;
       twoRolled = true;
     }
-  }
-
-  else if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
-      Locations.get(playerOneCounter).setOwned();
-      Location toOwn = Locations.get(playerOneCounter);
-      Players.get(0).addOwned(toOwn);
-      Players.get(0).withdraw(toOwn.getValue());
-    
-  }
-  else if (buyOver && turn == 1 && !Locations.get(playerTwoCounter).getOwned() && Locations.get(playerTwoCounter) instanceof Purchasable && Players.get(1).getBalance() - Locations.get(playerTwoCounter).getValue() >= 0) {
-      Locations.get(playerTwoCounter).setOwned();
-      Location toOwn = Locations.get(playerTwoCounter);
-      Players.get(1).addOwned(toOwn);
-      Players.get(1).withdraw(toOwn.getValue());
+    if (playerOneWorth < 0 || playerTwoWorth < 0) {
+      state = 2;
     }
-  
-  else if (endGameOver && state == 1) {
+  } else if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
+    Locations.get(playerOneCounter).setOwned();
+    Location toOwn = Locations.get(playerOneCounter);
+    Players.get(0).addOwned(toOwn);
+    Players.get(0).withdraw(toOwn.getValue());
+    playerOneWorth += toOwn.getValue();
+    if (Players.get(0).getBalance() <= 0) {
+      state = 2;
+    }
+  } else if (buyOver && turn == 1 && !Locations.get(playerTwoCounter).getOwned() && Locations.get(playerTwoCounter) instanceof Purchasable && Players.get(1).getBalance() - Locations.get(playerTwoCounter).getValue() >= 0) {
+    Locations.get(playerTwoCounter).setOwned();
+    Location toOwn = Locations.get(playerTwoCounter);
+    Players.get(1).addOwned(toOwn);
+    Players.get(1).withdraw(toOwn.getValue());
+    playerTwoWorth += toOwn.getValue();
+    if (Players.get(1).getBalance() <= 0) {
+      state = 2;
+    }
+  } else if (endGameOver && state == 1) {
     playerOneWorth = Players.get(0).getBalance();
     playerTwoWorth = Players.get(1).getBalance();
-    for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-      playerOneWorth += Players.get(0).getPurchasables().get(i).getValue();
-    }
-    for (int j = 0; j < Players.get(1).getPurchasables().size(); j++) {
-      playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
-    }
+    //for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
+    //  playerOneWorth += Players.get(0).getPurchasables().get(i).getValue();
+    //}
+    //for (int j = 0; j < Players.get(1).getPurchasables().size(); j++) {
+    //  playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
+    //}
     state = 2;
-  }
-  else if (menuOver) {
+  } else if (menuOver) {
     state = 0;
   }
 }
 void addChestCards() {
   Chest.add("FROM SALE OF STOCK. YOU GET $50.");
   Chest.add("HOSTPITAL FEES. PAY $100.");
-  Chest.add("YOU INHERIT. COLLECT $100");
+  Chest.add("YOU INHERIT. COLLECT $100.");
+  Chest.add("INCOME TAX REFUND. COLLECT $20.");
+  Chest.add("BANK ERROR IN YOUR FAVOR. COLLECT $200.");
+  Chest.add("GET OUT OF JAIL FREE.");
+  Chest.add("VACATION FUND MATURES. COLLECT $100.");
+  Chest.add("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.");
+  Chest.add("DOCTOR'S FEES. PAY $50.");
+  Chest.add("LIFE INSURANCE MATURES. COLLECT $100.");
+  Chest.add("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.");
+  Chest.add("ADVANCE TO GO.");
 }
 
 void addChanceCards() {
-  Chance.add("GO BACK THREE SPACES.");
-  Chance.add("YOUR BUILDING LOAN MATURES.");
-  Chance.add("SPEEDING FINE.");
+  Chance.add("YOUR BUILDING LOAN MATURES. COLLECT $150.");
+  Chance.add("SPEEDING FINE. PAY $15.");
+  Chance.add("THE BANK PAYS YOU DIVIDEND. COLLECT $50.");
+  Chance.add("GET OUT OF JAIL FREE.");
+  Chance.add("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.");
+  Chance.add("ADVANCE TO GO.");
+  //Chance.add("YOU HAVE BEEN ELECTED CHAIRMAN OF THE BOARD. PAY EACH PLAYER $50.");
 }
 
 void addLocations() {
