@@ -460,6 +460,7 @@ void mousePressed() {
   else if (startOver) {
     state = 1;
     restart();
+    playerOneCounter = playerTwoCounter = 0;
     playerOneX = playerOneY = 950;
     playerTwoX = 1020;
     playerTwoY = 1000;
