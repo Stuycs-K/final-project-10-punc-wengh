@@ -339,11 +339,12 @@ void mousePressed() {
       oneTurnsJail += 1;
       oneRolled = true;
       twoRolled = false;
-    } else if (turn == 0) {
+    } 
+    else if (turn == 0 && !oneRolled) {
       oneTurnsJail = 0;
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
-      move = 1;
+      move = d1 + d2;
 
       for (int i = 0; i < move; i++) {
         if (playerOneCounter >= 0 && playerOneCounter < 10) {
@@ -382,7 +383,8 @@ void mousePressed() {
 
       oneRolled = true;
       twoRolled = false;
-    } else if (twoInJail && turn ==1) {
+    } 
+    else if (twoInJail && turn ==1) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
       if (d3 == d4) {
@@ -427,11 +429,11 @@ void mousePressed() {
       twoRolled = true;
       oneRolled = false;
       twoTurnsJail +=1;
-    } else if (turn == 1) {
+    } else if (turn == 1 && !twoRolled) {
       twoTurnsJail = 0;
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
-      move = 1;
+      move = d3 + d4;
       for (int i = 0; i < move; i++) {
         if (playerTwoCounter > 0 && playerTwoCounter < 9) {
           playerTwoX -= 86;
