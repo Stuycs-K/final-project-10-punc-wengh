@@ -239,11 +239,10 @@ void draw() {
   else if (state == 1) {
     file.stop();
     if (!played2){
-      
     file2 = new SoundFile(this, "swing.wav");
-    file2.amp(0.25);
+    file2.amp(0.3);
     file2.play();
-    file2.loop();
+    
     played2 = true;
     played = false;
     }
@@ -466,11 +465,6 @@ void mousePressed() {
   else if (startOver) {
     state = 1;
     restart();
-    playerOneCounter = playerTwoCounter = 0;
-    playerOneX = playerOneY = 950;
-    playerTwoX = 1020;
-    playerTwoY = 1000;
-    d1 = d2 = d3 = d4 = 0;
     redraw();
   }
   else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
