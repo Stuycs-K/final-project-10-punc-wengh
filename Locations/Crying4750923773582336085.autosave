@@ -417,6 +417,7 @@ void draw() {
     file3 = new SoundFile(this, "end.wav");
     file3.amp(0.1);
     file3.jump(10);
+    file3.loop();
     played3 = true;
 
     }
