@@ -688,13 +688,25 @@ void mousePressed() {
 void addChestCards() {
   Chest.add("FROM SALE OF STOCK. YOU GET $50.");
   Chest.add("HOSTPITAL FEES. PAY $100.");
-  Chest.add("YOU INHERIT. COLLECT $100");
+  Chest.add("YOU INHERIT. COLLECT $100.");
+  Chest.add("INCOME TAX REFUND. COLLECT $20.");
+  Chest.add("BANK ERROR IN YOUR FAVOR. COLLECT $200.");
+  Chest.add("GET OUT OF JAIL FREE.");
+  Chest.add("VACATION FUND MATURES. COLLECT $100.");
+  Chest.add("YOU HAVE WON SECOND PRIZE IN A BEAUTY CONTEST. COLLECT $10.");
+  Chest.add("DOCTOR'S FEES. PAY $50.");
+  Chest.add("LIFE INSURANCE MATURES. COLLECT $100.");
+  Chest.add("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.");
+  Chest.add("ADVANCE TO GO.");
 }
 
 void addChanceCards() {
-  Chance.add("GO BACK THREE SPACES.");
-  Chance.add("YOUR BUILDING LOAN MATURES.");
-  Chance.add("SPEEDING FINE.");
+  Chance.add("YOUR BUILDING LOAN MATURES. COLLECT $150.");
+  Chance.add("SPEEDING FINE. PAY $15.");
+  Chance.add("THE BANK PAYS YOU DIVIDEND. COLLECT $50.");
+  Chance.add("GET OUT OF JAIL FREE.");
+  Chance.add("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.");
+  Chance.add("ADVANCE TO GO.");
 }
 
 void addLocations() {
