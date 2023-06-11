@@ -1,3 +1,4 @@
+import processing.sound.*;
 //initiate x and y vars, replace the parameters
 PImage board;
 PImage background;
@@ -31,6 +32,9 @@ boolean fineOver = false;
 boolean endGameOver = false;
 boolean menuOver = false;
 boolean jailCardOver = false;
+boolean played = false;
+boolean played2 = false;
+boolean played3 = false;
 int startX = 835;
 int startY = 489;
 int startWidth = 250;
@@ -54,9 +58,17 @@ boolean oneInJail = false;
 boolean twoInJail = false;
 int oneTurnsJail = 0;
 int twoTurnsJail = 0;
+SoundFile file;
+SoundFile file2;
+SoundFile file3;
+
 
 void setup() {
   size(1920, 1080);
+  init();
+}
+
+void init() {
   frameRate(100);
   countdown = 0;
   background = loadImage("background.jpg");
@@ -67,6 +79,8 @@ void setup() {
   addLocations();
   Players.add(new Player("Player 1's Turn"));
   Players.add(new Player("Player 2's Turn"));
+  
+
 }
 
 void update(int x, int y) {
@@ -100,6 +114,13 @@ void update(int x, int y) {
   } else {
     buyOver = diceOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
   }
+}
+
+void restart() {
+  Players.remove(0);
+  Players.remove(0);
+  Players.add(new Player("Player 1's Turn"));
+  Players.add(new Player("Player 2's Turn"));
 }
 
 boolean overDice(int x, int y, int width, int height) {
@@ -176,7 +197,26 @@ boolean overJailCard(int x, int y, int width, int height) {
 void draw() {
   update(mouseX, mouseY);
   if (state == 0) {
+
+    if (!played){
+    file = new SoundFile(this, "elevator music.wav");
+    file.play();
+    played = true;
+    
+  }
+  if (played2){
+    file2.stop();
+    played2 = false;
+  }
+  if (played3){
+    file3.stop();
+    played3 = false;
+  }
+    Players.add(new Player("Player 1's Turn"));
+    Players.add(new Player("Player 2's Turn"));
+
     background(background);
+
     PImage welcome = loadImage("welcome.png");
     image(welcome, width/4, height/22, width/2, height/2);
   
@@ -193,7 +233,16 @@ void draw() {
     textAlign(CENTER);
   }
 
-  if (state == 1) {
+
+  else if (state == 1) {
+    file.stop();
+    if (!played2){
+    file2 = new SoundFile(this, "swing.wav");
+    file2.play();
+    played2 = true;
+    played = false;
+    }
+    
     textSize(30);
     background(background);
     image(board, 0, 0, 1050, 1050);
@@ -356,7 +405,24 @@ void draw() {
       }
     }
   }
+  
   if (state == 2) {
+
+    if (!played3){
+    file3 = new SoundFile(this, "end.wav");
+    file3.jump(10);
+    file3.amp(0.25);
+    played3 = true;
+
+    }
+    if (played2){
+      file2.stop();
+      played2 = false;
+    }
+    if (played){
+      file.stop();
+      played = false;
+    }
     background(background);
     textSize(40);
     text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
@@ -383,25 +449,29 @@ void draw() {
   }
 }
 
+
 void mousePressed() {
   if (endOver && turn == 0 && oneRolled) {
     turn = 1;
-  } else if (endOver && turn == 1 && twoRolled) {
+  } 
+  else if (endOver && turn == 1 && twoRolled) {
     turn = 0;
   }
-  if (startOver) {
+  else if (startOver) {
     state = 1;
+    restart();
+    redraw();
   }
-  if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
+  else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
     Players.get(0).withdraw(200);
     oneInJail = false;
   }
-  if (fineOver && turn == 1 && twoInJail && Players.get(1).getBalance() - 200 >= 0) {
+  else if (fineOver && turn == 1 && twoInJail && Players.get(1).getBalance() - 200 >= 0) {
     Players.get(1).withdraw(200);
     twoInJail = false;
   }
 
-  if (diceOver) {
+  else if (diceOver) {
     if (oneInJail && turn == 0) {
 
       d1 = (int)(random(1, 7));
@@ -588,21 +658,21 @@ void mousePressed() {
     }
   }
 
-  if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
+  else if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
       Locations.get(playerOneCounter).setOwned();
       Location toOwn = Locations.get(playerOneCounter);
       Players.get(0).addOwned(toOwn);
       Players.get(0).withdraw(toOwn.getValue());
     
   }
-  if (buyOver && turn == 1 && !Locations.get(playerTwoCounter).getOwned() && Locations.get(playerTwoCounter) instanceof Purchasable && Players.get(1).getBalance() - Locations.get(playerTwoCounter).getValue() >= 0) {
+  else if (buyOver && turn == 1 && !Locations.get(playerTwoCounter).getOwned() && Locations.get(playerTwoCounter) instanceof Purchasable && Players.get(1).getBalance() - Locations.get(playerTwoCounter).getValue() >= 0) {
       Locations.get(playerTwoCounter).setOwned();
       Location toOwn = Locations.get(playerTwoCounter);
       Players.get(1).addOwned(toOwn);
       Players.get(1).withdraw(toOwn.getValue());
     }
   
-  if (endGameOver && state == 1) {
+  else if (endGameOver && state == 1) {
     playerOneWorth = Players.get(0).getBalance();
     playerTwoWorth = Players.get(1).getBalance();
     for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
@@ -613,7 +683,7 @@ void mousePressed() {
     }
     state = 2;
   }
-  if (menuOver) {
+  else if (menuOver) {
     state = 0;
   }
 }
