@@ -24,8 +24,7 @@ Added "Owned" function
 Fixed turn system and added "End Turn"
 
 ### June 11, 2023
-Added buttons: End Game, Jail Card, Menu
-Added music, updated taxes, and added purchase limits
+Added buttons: End Game, Jail Card, Menu; Added music, updated taxes, and added purchase limits
 
 
 ## GROUP MEMBER 2: Hui Wen Weng
@@ -52,6 +51,4 @@ Added Buy option to game play
 Added Start Screen
 
 ### June 11, 2023
-Added End Screen
-Reset the game board after each 
-Displaying random Chance/Community Chest cards
+Added End Screen; Reset the game board after each; Displaying random Chance/Community Chest cards
