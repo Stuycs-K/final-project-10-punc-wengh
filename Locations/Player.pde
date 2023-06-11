@@ -2,7 +2,7 @@ public class Player{
   String name, currentLocation;
   int balance;
   ArrayList <Location> Purchasables;
-  ArrayList<String> cards;
+  ArrayList<String> Cards;
 
   
   public Player(){

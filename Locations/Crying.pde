@@ -18,6 +18,7 @@ int endX = 1690;
 int endY = 930;
 int gameEndX = 1690;
 int gameEndY = 50;
+int playerOneWorth, playerTwoWorth;
 boolean diceOver = false;
 boolean buyOver = false;
 boolean endOver = false;
@@ -304,7 +305,26 @@ void draw() {
         text("Pay Fine", fineX + 100, fineY + 50);
       }
     }
+    
   }
+  if (endGameOver) {
+      background(background);
+      textSize(40);
+      text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
+      text("Player 2 Net Worth: " + playerTwoWorth, width/2, height/3+50);
+      textSize(30);
+      text("The winner is...", width/2, height/2);
+      textSize(80);
+      if (playerOneWorth > playerTwoWorth) {
+        text("PLAYER 1!!!", width/2, height/2+100);
+      }
+      else if (playerOneWorth == playerTwoWorth) {
+        text("PLAYER 1 AND PLAYER 2 (IT IS A TIE) !!!", width/2, height/2+100);
+      }
+      else {
+        text("PLAYER 2!!!", width/2, height/2+100);
+      }
+    }
 }
 
 void mousePressed() {
@@ -517,6 +537,16 @@ void mousePressed() {
       Location toOwn = Locations.get(playerTwoCounter);
       Players.get(1).addOwned(toOwn);
       Players.get(1).withdraw(toOwn.getValue());
+    }
+  }
+  if (endGameOver) {
+    playerOneWorth = Players.get(0).getBalance();
+    playerTwoWorth = Players.get(1).getBalance();
+    for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
+      playerOneWorth += Players.get(0).getPurchasables().get(i).getValue();
+    }
+    for (int j = 0; j < Players.get(1).getPurchasables().size(); j++) {
+      playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
     }
   }
 }
