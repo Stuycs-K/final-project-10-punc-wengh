@@ -6,6 +6,7 @@ int state = 0;
 ArrayList <Location> Locations = new ArrayList<Location>();
 ArrayList <String> Chest = new ArrayList<String>();
 ArrayList <String> Chance = new ArrayList<String>();
+String randomChest, randomChance;
 ArrayList <Player> Players = new ArrayList<Player>();
 int buttonWidth = 200;
 int buttonHeight = 80 ;
@@ -82,6 +83,8 @@ void init() {
 }
 
 void update(int x, int y) {
+  randomChest = Chest.get((int)Math.random()* Chest.size());
+  randomChance = Chest.get((int)Math.random()* Chest.size());
   if (overDice(diceX, diceY, buttonWidth, buttonHeight)) {
     diceOver = true;
     buyOver = endOver = startOver = fineOver = endGameOver = menuOver = jailCardOver = false;
@@ -257,6 +260,22 @@ void draw() {
 
     fill(255, 0, 0);
     circle(playerOneX, playerOneY, 50);
+    
+    if (Locations.get(playerOneCounter) instanceof Card) {
+
+      if (Locations.get(playerOneCounter) instanceof Chest) {
+        text(randomChest, width-width/4, height/2);
+      } else {
+        text(randomChance, width-width/4, height/2);
+      }
+    }
+    if (Locations.get(playerTwoCounter) instanceof Card) {
+      if (Locations.get(playerTwoCounter) instanceof Chest) {
+        text(randomChest, width-width/4, height/2);
+      } else {
+        text(randomChance, width-width/4, height/2);
+      }
+    }
 
     //player 1
     if (turn == 0) {
@@ -470,6 +489,7 @@ void mousePressed() {
     Players.get(1).withdraw(200);
     twoInJail = false;
   } else if (diceOver) {
+
     if (oneInJail && turn == 0) {
 
       d1 = (int)(random(1, 7));
@@ -707,6 +727,7 @@ void addChanceCards() {
   Chance.add("GET OUT OF JAIL FREE.");
   Chance.add("GO TO JAIL. GO DIRECTLY TO JAIL. DO NOT PASS GO, DO NOT COLLECT $200.");
   Chance.add("ADVANCE TO GO.");
+  //Chance.add("YOU HAVE BEEN ELECTED CHAIRMAN OF THE BOARD. PAY EACH PLAYER $50.");
 }
 
 void addLocations() {
