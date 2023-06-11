@@ -307,7 +307,7 @@ void draw() {
     }
     
   }
-  if (endGameOver) {
+  if (endGameOver && state == 2) {
       background(background);
       textSize(40);
       text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
@@ -559,6 +559,7 @@ void mousePressed() {
     for (int j = 0; j < Players.get(1).getPurchasables().size(); j++) {
       playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
     }
+    state = 2;
   }
 }
 void addChestCards() {
