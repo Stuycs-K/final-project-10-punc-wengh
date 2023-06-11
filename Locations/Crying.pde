@@ -1,3 +1,4 @@
+import processing.sound.*;
 //initiate x and y vars, replace the parameters
 PImage board;
 PImage background;
@@ -31,6 +32,9 @@ boolean fineOver = false;
 boolean endGameOver = false;
 boolean menuOver = false;
 boolean jailCardOver = false;
+boolean played = false;
+boolean played2 = false;
+boolean played3 = false;
 int startX = 835;
 int startY = 489;
 int startWidth = 250;
@@ -54,6 +58,10 @@ boolean oneInJail = false;
 boolean twoInJail = false;
 int oneTurnsJail = 0;
 int twoTurnsJail = 0;
+SoundFile file;
+SoundFile file2;
+SoundFile file3;
+
 
 void setup() {
   size(1920, 1080);
@@ -67,6 +75,8 @@ void setup() {
   addLocations();
   Players.add(new Player("Player 1's Turn"));
   Players.add(new Player("Player 2's Turn"));
+  
+
 }
 
 void update(int x, int y) {
@@ -176,7 +186,22 @@ boolean overJailCard(int x, int y, int width, int height) {
 void draw() {
   update(mouseX, mouseY);
   if (state == 0) {
+    if (!played){
+    file = new SoundFile(this, "elevator music.wav");
+    file.play();
+    played = true;
+    
+  }
+  if (played2){
+    file2.stop();
+    played2 = false;
+  }
+  if (played3){
+    file3.stop();
+    played3 = false;
+  }
     background(background);
+
     PImage welcome = loadImage("welcome.png");
     image(welcome, width/4, height/22, width/2, height/2);
   
@@ -194,6 +219,13 @@ void draw() {
   }
 
   if (state == 1) {
+    file.stop();
+    if (!played2){
+    file2 = new SoundFile(this, "swing.wav");
+    file2.play();
+    played2 = true;
+    played = false;
+    }
     textSize(30);
     background(background);
     image(board, 0, 0, 1050, 1050);
@@ -357,6 +389,22 @@ void draw() {
     }
   }
   if (state == 2) {
+
+    if (!played3){
+    file3 = new SoundFile(this, "end.wav");
+    file3.jump(10);
+    file3.amp(0.25);
+    played3 = true;
+
+    }
+    if (played2){
+      file2.stop();
+      played2 = false;
+    }
+    if (played){
+      file.stop();
+      played = false;
+    }
     background(background);
     textSize(40);
     text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
