@@ -17,6 +17,16 @@ Added player movement, player statistics, roll dice, and counter
 ### June 1, 2023
 Added deposit after every "GO"
 
+### June 2, 2023
+Added "Owned" function
+
+### June 8, 2023
+Fixed turn system and added "End Turn"
+
+### June 11, 2023
+Added buttons: End Game, Jail Card, Menu
+Added music, updated taxes, and added purchase limits
+
 
 ## GROUP MEMBER 2: Hui Wen Weng
 
@@ -37,3 +47,11 @@ Finished Jail and Tax classes
 
 ### June 1, 2023
 Added Buy option to game play
+
+### June 9, 2023
+Added Start Screen
+
+### June 11, 2023
+Added End Screen
+Reset the game board after each 
+Displaying random Chance/Community Chest cards
