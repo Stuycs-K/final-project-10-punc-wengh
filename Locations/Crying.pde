@@ -12,7 +12,6 @@ int diceX = 1060;
 int diceY = 930;
 int buyX = 1270;
 int buyY = 930;
-
 int fineX = 1480;
 int fineY = 930;
 int endX = 1690;
@@ -46,7 +45,6 @@ boolean twoInJail = false;
 int oneTurnsJail = 0;
 int twoTurnsJail = 0;
 
-
 void setup() {
   size(1920, 1080);
   frameRate(100);
@@ -59,7 +57,6 @@ void setup() {
   addLocations();
   Players.add(new Player("Player 1's Turn"));
   Players.add(new Player("Player 2's Turn"));
-
 }
 
 void update(int x, int y) {
@@ -69,23 +66,17 @@ void update(int x, int y) {
     endOver = false;
     startOver = false;
     fineOver = false;
-
   } else if (overBuy(buyX, buyY, buttonWidth, buttonHeight)) {
     buyOver = true;
     diceOver = false;
     endOver = false;
     startOver = false;
     fineOver = false;
-
   } else if (overEnd(endX, endY, buttonWidth, buttonHeight)) {
     endOver = true;
     buyOver = false;
     diceOver = false;
     startOver = false;
-
-    
-  } else if(overStart(startX, startY, startWidth, startHeight)) {
-
     fineOver = false;
   } else if (overFine(fineX, fineY, buttonWidth, buttonHeight)) {
     fineOver = true;
@@ -94,17 +85,13 @@ void update(int x, int y) {
     diceOver = false;
     startOver = false;
   } else if (overStart(startX, startY, startWidth, startHeight)) {
-
     startOver = true;
     endOver = false;
     buyOver = false;
     diceOver = false;
     fineOver = false;
-    
-  }
-  else {
+  } else {
     buyOver = diceOver = endOver = startOver = fineOver = false;
-
   }
 }
 
@@ -159,17 +146,17 @@ void draw() {
 
   fill(255);
   if (startOver) {
-      fill(255, 255, 0);
-    } else {
-      fill(255);
-    }
-
+    fill(255, 255, 0);
+  } else {
+    fill(255);
+  }
   rect(startX, startY, startWidth, startHeight);
   fill(0);
   textSize(40);
   text("Start", width/2, height/2+10);
   textAlign(CENTER);
   update(mouseX, mouseY);
+
 
   if (state == 1) {
     background(background);
@@ -229,7 +216,6 @@ void draw() {
         rect(buyX, buyY, buttonWidth, buttonHeight);
         fill(0);
         text("Buy", buyX + 100, buyY + 50);
-
       }
       if (oneTurnsJail < 2 && oneInJail) {
         if (fineOver) {
@@ -240,7 +226,6 @@ void draw() {
         rect(fineX, fineY, buttonWidth, buttonHeight);
         fill(0);
         text("Pay Fine", fineX + 100, fineY + 50);
-
       }
     }
 
@@ -286,8 +271,6 @@ void draw() {
         rect(buyX, buyY, buttonWidth, buttonHeight);
         fill(0);
         text("Buy", buyX + 100, buyY + 50);
-
-
       }
       if (twoTurnsJail < 2 && twoInJail) {
         if (fineOver) {
@@ -298,7 +281,6 @@ void draw() {
         rect(fineX, fineY, buttonWidth, buttonHeight);
         fill(0);
         text("Pay Fine", fineX + 100, fineY + 50);
-
       }
     }
   }
@@ -323,7 +305,6 @@ void mousePressed() {
   }
 
   if (diceOver) {
-
     if (oneInJail && turn == 0) {
 
       d1 = (int)(random(1, 7));
@@ -361,35 +342,11 @@ void mousePressed() {
     } 
     else if (turn == 0 && !oneRolled) {
       oneTurnsJail = 0;
-
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
       move = d1 + d2;
 
       for (int i = 0; i < move; i++) {
-
-          if (playerOneCounter >= 0 && playerOneCounter < 10) {
-            playerOneX -= 86;
-            playerOneCounter += 1;
-
-          } else if (playerOneCounter >= 10 && playerOneCounter < 20) {
-            playerOneY -= 84;
-            playerOneCounter += 1;
-
-          } else if (playerOneCounter >= 20 && playerOneCounter < 30) {
-            playerOneX += 86;
-            playerOneCounter += 1;
-
-          } else if (playerOneCounter >= 30 && playerOneCounter < 40) {
-            playerOneY += 84;
-            playerOneCounter += 1;
-
-          }
-          if (playerOneCounter == 40) {
-            playerOneCounter = 0;
-            Players.get(0).deposit(200);
-          }
-
         if (playerOneCounter >= 0 && playerOneCounter < 10) {
           playerOneX -= 86;
           playerOneCounter += 1;
@@ -407,10 +364,10 @@ void mousePressed() {
           playerOneCounter = 0;
           Players.get(0).deposit(200);
         }
-      
+      }
 
-      for (int k = 0; k < Players.get(1).getPurchasables().size(); k++) {
-        if (Locations.get(playerOneCounter).getName().equals(Players.get(1).getPurchasables().get(k).getName())) {
+      for (int i = 0; i < Players.get(1).getPurchasables().size(); i++) {
+        if (Locations.get(playerOneCounter).getName().equals(Players.get(1).getPurchasables().get(i).getName())) {
           Players.get(0).withdraw(Players.get(1).getPurchasables().get(i).getValue());
           Players.get(1).deposit(Players.get(1).getPurchasables().get(i).getValue());
         }
@@ -426,8 +383,7 @@ void mousePressed() {
 
       oneRolled = true;
       twoRolled = false;
-    }
-    }
+    } 
     else if (twoInJail && turn ==1) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
@@ -474,10 +430,7 @@ void mousePressed() {
       oneRolled = false;
       twoTurnsJail +=1;
     } else if (turn == 1 && !twoRolled) {
-
-
       twoTurnsJail = 0;
-
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
       move = d3 + d4;
@@ -485,47 +438,37 @@ void mousePressed() {
         if (playerTwoCounter > 0 && playerTwoCounter < 9) {
           playerTwoX -= 86;
           playerTwoCounter += 1;
-
-
-        }
-        else if (playerTwoCounter == 9 || playerTwoCounter == 0){
+        } else if (playerTwoCounter == 9 || playerTwoCounter == 0) {
           playerTwoX -= 150;
           playerTwoCounter += 1;
-        }
-        else if (playerTwoCounter == 20 || playerTwoCounter == 29){
+        } else if (playerTwoCounter == 20 || playerTwoCounter == 29) {
           playerTwoX += 150;
           playerTwoCounter +=1;
-        }
-        else if (playerTwoCounter == 10 || playerTwoCounter == 19){
+        } else if (playerTwoCounter == 10 || playerTwoCounter == 19) {
           playerTwoY -= 150;
           playerTwoCounter += 1;
-        }
-        else if (playerTwoCounter == 30 || playerTwoCounter == 39){
+        } else if (playerTwoCounter == 30 || playerTwoCounter == 39) {
           playerTwoY += 150;
           playerTwoCounter +=1;
-        }
-
-        else if (playerTwoCounter > 10 && playerTwoCounter < 19) {
+        } else if (playerTwoCounter > 10 && playerTwoCounter < 19) {
           playerTwoY -= 83;
           playerTwoCounter += 1;
-
         } else if (playerTwoCounter >= 20 && playerTwoCounter < 29) {
           playerTwoX += 86;
           playerTwoCounter += 1;
- 
         } else if (playerTwoCounter >= 30 && playerTwoCounter < 39) {
           playerTwoY += 83;
           playerTwoCounter += 1;
-
+        }
         if (playerTwoCounter == 40) {
           playerTwoCounter = 0;
           Players.get(1).deposit(200);
         }
       }
-      for (int j = 0; j < Players.get(0).getPurchasables().size(); j++) {
-        if (Locations.get(playerOneCounter).getName().equals(Players.get(0).getPurchasables().get(j).getName())) {
-          Players.get(1).withdraw(Players.get(0).getPurchasables().get(j).getValue());
-          Players.get(0).deposit(Players.get(0).getPurchasables().get(j).getValue());
+      for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
+        if (Locations.get(playerOneCounter).getName().equals(Players.get(0).getPurchasables().get(i).getName())) {
+          Players.get(1).withdraw(Players.get(0).getPurchasables().get(i).getValue());
+          Players.get(0).deposit(Players.get(0).getPurchasables().get(i).getValue());
         }
       }
       if (Locations.get(playerTwoCounter).getName().equals("Go To Jail")) {
@@ -555,7 +498,6 @@ void mousePressed() {
       Players.get(1).withdraw(toOwn.getValue());
     }
   }
-}
 }
 void addChestCards() {
   Chest.add("FROM SALE OF STOCK. YOU GET $50.");
