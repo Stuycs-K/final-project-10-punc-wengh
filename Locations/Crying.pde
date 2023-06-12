@@ -595,9 +595,7 @@ void mousePressed() {
         }
         oneRolled = true;
         twoRolled = false;
-      } else {
-        oneRolled = true;
-        twoRolled = false;
+      
       }
     } else if (turn == 0 && !oneRolled) {
       d1 = (int)(random(1, 7));
@@ -913,7 +911,7 @@ void mousePressed() {
         Players.get(1).withdraw(100);
       }
       if (d3 == d4) {
-        oneRolled = false;
+        oneRolled = true;
         twoRolled = false;
       }
       else{
