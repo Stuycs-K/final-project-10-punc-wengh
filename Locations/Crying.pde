@@ -465,12 +465,14 @@ void draw() {
     textSize(40);
     text("Player 1 Net Worth: " + playerOneWorth, width/2, height/3);
     text("Player 2 Net Worth: " + playerTwoWorth, width/2, height/3+50);
+    text("Player 1 Balance: " + Players.get(0).getBalance(), width/2, height/3 + 100);
+    text("Player 2 Balance: " + Players.get(1).getBalance(), width/2, height/3 + 150);
     textSize(30);
-    text("The winner is...", width/2, height/2);
+    text("The winner is...", width/2, height/2 + 10);
     textSize(80);
-    if (playerOneWorth > playerTwoWorth) {
+    if (Players.get(0).getBalance() > Players.get(1).getBalance()) {
       text("PLAYER 1!!!", width/2, height/2+100);
-    } else if (playerOneWorth == playerTwoWorth) {
+    } else if (Players.get(0).getBalance() == Players.get(1).getBalance()) {
       text("PLAYER 1 AND PLAYER 2 (IT IS A TIE) !!!", width/2, height/2+100);
     } else {
       text("PLAYER 2!!!", width/2, height/2+100);
