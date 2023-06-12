@@ -943,12 +943,12 @@ void mousePressed() {
   } else if (endGameOver && state == 1) {
     playerOneWorth = Players.get(0).getBalance();
     playerTwoWorth = Players.get(1).getBalance();
-    //for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
-    //  playerOneWorth += Players.get(0).getPurchasables().get(i).getValue();
-    //}
-    //for (int j = 0; j < Players.get(1).getPurchasables().size(); j++) {
-    //  playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
-    //}
+    for (int i = 0; i < Players.get(0).getPurchasables().size(); i++) {
+      playerOneWorth += Players.get(0).getPurchasables().get(i).getValue();
+    }
+    for (int j = 0; j < Players.get(1).getPurchasables().size(); j++) {
+      playerTwoWorth += Players.get(1).getPurchasables().get(j).getValue();
+    }
     state = 2;
   } else if (menuOver) {
     state = 0;
