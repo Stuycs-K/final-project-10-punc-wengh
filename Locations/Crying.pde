@@ -615,9 +615,9 @@ void mousePressed() {
             }
           }
         }
+      }
         oneRolled = true;
         twoRolled = false;
-      }
       if (Players.get(0).getBalance() < 0 || Players.get(1).getBalance() < 0) {
         state = 2;
       }
