@@ -595,10 +595,10 @@ void mousePressed() {
         }
         oneRolled = true;
         twoRolled = false;
+      } else {
+        oneRolled = true;
+        twoRolled = false;
       }
-
-      oneRolled = true;
-      twoRolled = false;
     } else if (turn == 0 && !oneRolled) {
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
@@ -698,9 +698,14 @@ void mousePressed() {
       if (Locations.get(playerOneCounter).getName().equals("Luxury Tax")) {
         Players.get(0).withdraw(100);
       }
-
-      oneRolled = true;
-      twoRolled = false;
+      if (d1 == d2) {
+        oneRolled = false;
+        twoRolled = false;
+      }
+      else{
+        oneRolled = true;
+        twoRolled = false;
+      }
     } else if (twoInJail && turn ==1) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
@@ -907,8 +912,14 @@ void mousePressed() {
       if (Locations.get(playerTwoCounter).getName().equals("Luxury Tax")) {
         Players.get(1).withdraw(100);
       }
-      oneRolled = false;
-      twoRolled = true;
+      if (d3 == d4) {
+        oneRolled = false;
+        twoRolled = false;
+      }
+      else{
+        oneRolled = false;
+        twoRolled = true;
+      }
     }
     if (playerOneWorth < 0 || playerTwoWorth < 0) {
       state = 2;
