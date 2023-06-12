@@ -198,6 +198,7 @@ boolean overJailCard(int x, int y, int width, int height) {
 
 void draw() {
   update(mouseX, mouseY);
+
   if (state == 0) {
 
     if (!played) {
@@ -491,6 +492,7 @@ void draw() {
 
 
 void mousePressed() {
+
   if (endOver && turn == 0 && oneRolled) {
     turn = 1;
   } else if (endOver && turn == 1 && twoRolled) {
@@ -499,9 +501,13 @@ void mousePressed() {
     state = 1;
     restart();
     playerOneCounter = playerTwoCounter = 0;
+    oneJailCard = 0;
+    twoJailCard = 0;
     playerOneX = playerOneY = 950;
     playerTwoX = 1020;
     playerTwoY = 1000;
+    oneRolled = false;
+    twoRolled = false;
     d1 = d2 = d3 = d4 = 0;
     redraw();
   } else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
@@ -597,7 +603,9 @@ void mousePressed() {
         }
         oneRolled = true;
         twoRolled = false;
-      
+      }
+      if (Players.get(0).getBalance() < 0 || Players.get(1).getBalance() < 0) {
+        state = 2;
       }
     } else if (turn == 0 && !oneRolled) {
       d1 = (int)(random(1, 7));
@@ -701,10 +709,12 @@ void mousePressed() {
       if (d1 == d2) {
         oneRolled = false;
         twoRolled = false;
-      }
-      else{
+      } else {
         oneRolled = true;
         twoRolled = false;
+      }
+      if (Players.get(0).getBalance() < 0 || Players.get(1).getBalance() < 0) {
+        state = 2;
       }
     } else if (twoInJail && turn ==1) {
       d3 = (int)(random(1, 7));
@@ -803,6 +813,9 @@ void mousePressed() {
       }
       twoRolled = true;
       oneRolled = false;
+      if (Players.get(0).getBalance() < 0 || Players.get(1).getBalance() < 0) {
+        state = 2;
+      }
     } else if (turn == 1 && !twoRolled) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
@@ -915,13 +928,12 @@ void mousePressed() {
       if (d3 == d4) {
         oneRolled = true;
         twoRolled = false;
-      }
-      else{
+      } else {
         oneRolled = false;
         twoRolled = true;
       }
     }
-    if (playerOneWorth < 0 || playerTwoWorth < 0) {
+    if (Players.get(0).getBalance() < 0 || Players.get(1).getBalance() < 0) {
       state = 2;
     }
   } else if (buyOver && turn == 0 && !Locations.get(playerOneCounter).getOwned() && Locations.get(playerOneCounter) instanceof Purchasable && Players.get(0).getBalance() - Locations.get(playerOneCounter).getValue() >= 0) {
