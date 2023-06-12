@@ -602,7 +602,7 @@ void mousePressed() {
     } else if (turn == 0 && !oneRolled) {
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
-      move = 1;
+      move = d1 + d2;
 
       for (int i = 0; i < move; i++) {
         if (playerOneCounter >= 0 && playerOneCounter < 10) {
@@ -801,7 +801,7 @@ void mousePressed() {
     } else if (turn == 1 && !twoRolled) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
-      move = 1;
+      move = d3 + d4;
       for (int i = 0; i < move; i++) {
         if (playerTwoCounter > 0 && playerTwoCounter < 9) {
           playerTwoX -= 86;
