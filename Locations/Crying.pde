@@ -350,9 +350,11 @@ void draw() {
         } else {
           fill(255);
         }
+        if (oneJailCard > 0){
         rect(jailCardX, jailCardY, buttonWidth, buttonHeight);
         fill(0);
         text("Use Card", jailCardX + 100, jailCardY + 50);
+        }
       }
     }
 
@@ -438,9 +440,11 @@ void draw() {
         } else {
           fill(255);
         }
+        if (twoJailCard > 0){
         rect(jailCardX, jailCardY, buttonWidth, buttonHeight);
         fill(0);
         text("Use Card", jailCardX + 100, jailCardY + 50);
+        }
       }
     }
   }
@@ -495,7 +499,16 @@ void mousePressed() {
 
   if (endOver && turn == 0 && oneRolled) {
     turn = 1;
-  } else if (endOver && turn == 1 && twoRolled) {
+  } 
+  if(jailCardOver || buyOver && oneInJail && turn == 0 && oneJailCard > 0){
+    oneInJail = false;
+    oneJailCard--;
+  }
+  if(jailCardOver || buyOver && twoInJail && turn == 1 && twoJailCard > 0){
+    twoInJail = false;
+    twoJailCard--;
+  }
+  else if (endOver && turn == 1 && twoRolled) {
     turn = 0;
   } else if (startOver) {
     state = 1;
@@ -507,7 +520,8 @@ void mousePressed() {
     playerTwoX = 1020;
     playerTwoY = 1000;
     oneRolled = false;
-    twoRolled = false;
+    twoRolled = true;
+    turn = 0;
     d1 = d2 = d3 = d4 = 0;
     redraw();
   } else if (fineOver && turn == 0 && oneInJail && Players.get(0).getBalance() - 200 >= 0) {
@@ -524,7 +538,7 @@ void mousePressed() {
       d2 = (int)(random(1, 7));
       if (d1 == d2) {
         oneInJail = false;
-        move = d1 + d2;
+        move = 1;
         for (int i = 0; i < move; i++) {
           if (playerOneCounter >= 0 && playerOneCounter < 10) {
             playerOneX -= 86;
@@ -610,7 +624,7 @@ void mousePressed() {
     } else if (turn == 0 && !oneRolled) {
       d1 = (int)(random(1, 7));
       d2 = (int)(random(1, 7));
-      move = d1 + d2;
+      move = 1;
 
       for (int i = 0; i < move; i++) {
         if (playerOneCounter >= 0 && playerOneCounter < 10) {
@@ -721,7 +735,7 @@ void mousePressed() {
       d4 = (int)(random(1, 7));
       if (d3 == d4) {
         twoInJail = false;
-        move = d3 + d4;
+        move = 1;
         for (int i = 0; i < move; i++) {
           if (playerTwoCounter > 0 && playerTwoCounter < 9) {
             playerTwoX -= 86;
@@ -819,7 +833,7 @@ void mousePressed() {
     } else if (turn == 1 && !twoRolled) {
       d3 = (int)(random(1, 7));
       d4 = (int)(random(1, 7));
-      move = d3 + d4;
+      move = 1;
       for (int i = 0; i < move; i++) {
         if (playerTwoCounter > 0 && playerTwoCounter < 9) {
           playerTwoX -= 86;
