@@ -52,3 +52,32 @@ Added Start Screen
 
 ### June 11, 2023
 Added End Screen; Reset the game board after each; Displaying random Chance/Community Chest cards
+
+## Development Log
+### Working features
+* Start button
+* Menu button
+* Roll Die button
+* Buy Button
+* End Turn button
+* End Game button
+* Use Card button
+* Pay Fine button
+* The ability to roll a double to get out of jail
+* An extra turn for players that roll a double, 
+* Player tokens move based on dice rolls
+* Automatically move players to jail upon landing on Go to Jail
+* Automatically adding $200 to each player that passes GO
+* Display current player information (balance, number of Get Out of Jail cards, properties)
+* Display description of Chance/Community Chest cards when players land on the respective location
+* Transitions player from start screen to game board
+* Calculates the displays the winner on the end screen
+* Different background music for each screen (start, game, end)
+### Broken Features/Bugs
+* Trading of properties between players
+* Leveling up properties (houses and hotels)
+* Increase in rent when a player possess a complete color set
+### Helpful Resources
+* Inheritance
+* Abstraction
+* ArrayLists
